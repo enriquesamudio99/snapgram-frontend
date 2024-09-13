@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  // Font Family
+  --ff-inter: 'Inter', sans-serif;
+
+  // Colors
+  --clr-primary: #877EFF;
+  --clr-secondary: #FFB620;
+  --clr-dark-1: #000000;
+  --clr-dark-2: #09090A;
+  --clr-dark-3: #101012;
+  --clr-dark-4: #1F1F22;
+  --clr-light-1: #FFFFFF;
+  --clr-light-2: #EFEFEF;
+  --clr-light-3: #7878A3;
+  --clr-light-4: #5C5C7B;
+
+  // Gradient
+  --gradient-purple-blue: linear-gradient(180deg, rgba(135,126,255,1) 0%, rgba(104,93,255,1) 46%, rgba(49,33,255,1) 100%);
+
+  // Font Weights
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}

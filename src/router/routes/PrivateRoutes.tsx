@@ -1,9 +1,9 @@
-import { MainLayout } from '../../layout';
+import { MainLayout } from '../../layouts';
 
 const privateRoutes = [
   {
     path: '/',
-    element: <MainLayout />, // Aquí va el layout o estructura
+    element: <MainLayout />,
     children: [
       { path: '', element: <h1>Home</h1> },
       { path: 'profile', element: <h1>Profile</h1> }

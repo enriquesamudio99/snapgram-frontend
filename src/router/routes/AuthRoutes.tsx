@@ -1,9 +1,9 @@
-import { AuthLayout } from '../../layout';
+import { AuthLayout } from '../../layouts';
 
 const authRoutes = [
   {
     path: '/auth',
-    element: <AuthLayout />, // Aquí va el layout o estructura
+    element: <AuthLayout />,
     children: [
       { path: 'login', element: <h1>Login</h1> },
       { path: 'register', element: <h1>Register</h1> }

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useAuthStore } from '../hooks';
+import { useAuth } from '../hooks';
 import { authRoutes, privateRoutes } from '../router/routes';
 
 
 const AppRouter = () => {
 
-  const { status, checkAuthToken } = useAuthStore();
+  const { status, checkAuthToken } = useAuth();
 
   useEffect(() => {
     checkAuthToken(); 
