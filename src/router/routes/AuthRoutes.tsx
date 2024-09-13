@@ -1,12 +1,13 @@
 import { AuthLayout } from '../../layouts';
+import { Login, Register } from '../../auth/pages';
 
 const authRoutes = [
   {
     path: '/auth',
     element: <AuthLayout />,
     children: [
-      { path: 'login', element: <h1>Login</h1> },
-      { path: 'register', element: <h1>Register</h1> }
+      { path: 'login', element: <Login /> },
+      { path: 'register', element: <Register /> }
     ]
   }
 ];

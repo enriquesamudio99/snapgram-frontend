@@ -1,4 +1,5 @@
-import { AxiosResponse } from 'axios';
+import { useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useUserContext } from '../context/AuthContext';
 import { api } from '../api';
 
@@ -14,16 +15,25 @@ interface AuthResponse {
   };
 }
 
+interface AuthResult {
+  response?: AxiosResponse<AuthResponse>;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
 interface LoginProps {
   email: string;
   password: string;
 }
 
 interface RegisterProps {
-  firstName: string;
-  lastName: string;
+  name: string;
   username: string;
-  bio: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -32,31 +42,67 @@ interface RegisterProps {
 const useAuth = () => {
 
   const { user, status, checking, login, logout } = useUserContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const startLogin = async (loginData : LoginProps) => {
-    checking();
+  const startLogin = async (loginData : LoginProps) : Promise<AuthResult> => {
+    setIsLoading(true);
     try {
-      const { data }: AxiosResponse<AuthResponse> = await api.post('/auth/login', loginData);
-
-      localStorage.setItem("token", data.token);
-      login(data.user);
-    } catch (error) {
+      const response: AxiosResponse<AuthResponse> = await api.post('/auth/login', loginData);
+      localStorage.setItem("token", response.data.token);
+      login(response.data.user);
+      return {
+        response
+      }
+    } catch (error: unknown) {
       console.log(error);
       logout();
+      if (error instanceof AxiosError) {
+        return {
+          error: {
+            message: error.message,
+            data: error.response?.data
+          }
+        }
+      }
+      return {
+        error: {
+          message: "Something wrong"
+        }
+      }
+    } finally {
+      setIsLoading(false);
     }
   }
 
   const startRegister = async (registerData : RegisterProps) => {
-    checking();
+    setIsLoading(true);
     try {
-      const { data }: AxiosResponse<AuthResponse> = await api.post('/auth/register', registerData);
-      console.log(data);
+      const response : AxiosResponse<AuthResponse> = await api.post('/auth/register', registerData);
 
-      localStorage.setItem("token", data.token);
-      login(data.user);
-    } catch (error) {
+      localStorage.setItem("token", response.data.token);
+      login(response.data.user);
+
+      return {
+        response
+      }
+    } catch (error: unknown) {
       console.log(error);
       logout();
+      if (error instanceof AxiosError) {
+        return {
+          error: {
+            message: error.message,
+            data: error.response?.data
+          }
+        }
+      }
+      return {
+        error: {
+          message: "Something wrong"
+        }
+      }
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -70,7 +116,7 @@ const useAuth = () => {
 
     const token = localStorage.getItem('token');
   
-    if (!token) return logout();;
+    if (!token) return logout();
 
     try {
       const { data }: AxiosResponse<AuthResponse> = await api.get('/auth/refresh');
@@ -89,7 +135,8 @@ const useAuth = () => {
     startLogin,
     startRegister,
     startLogout,
-    checkAuthToken
+    checkAuthToken,
+    isLoading
   }
 }
 

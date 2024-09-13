@@ -3,3 +3,42 @@ body {
   background: var(--clr-dark-1);
   color: var(--clr-light-1);
 }
+
+.form {
+  &__container {
+    display: grid;
+    gap: 1.875rem;
+  }
+
+  &__groups {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  &__group {
+    display: grid;
+    gap: .75rem;
+  }
+
+  &__label {
+    color: var(--clr-light-2);
+    font-weight: var(--fw-medium);
+  }
+
+  &__input {
+    padding: 1rem 1.25rem;
+    background-color: var(--clr-dark-3);
+    font-weight: var(--fw-semibold);
+    border-radius: .625rem;
+  }
+
+  &__message {
+    font-size: .875rem;
+    color: var(--clr-warning);
+  }
+}
+
+// Toastify
+.Toastify__toast-body {
+  padding: 1rem 1.25rem;
+}

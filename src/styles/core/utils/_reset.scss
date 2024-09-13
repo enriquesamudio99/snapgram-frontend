@@ -21,11 +21,11 @@ body {
   min-height: 100vh;
   font-weight: var(--fw-regular);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 img {
@@ -34,11 +34,17 @@ img {
   height: auto;
 }
 
-button {
+button,
+input {
   background-color: transparent;
+  color: var(--clr-light-1);
   border: 0;
   outline: 0;
+  font-size: inherit;
   font-family: inherit;
+}
+
+button {
   cursor: pointer;
 }
 

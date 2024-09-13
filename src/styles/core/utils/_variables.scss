@@ -15,6 +15,7 @@
   --clr-light-2: #EFEFEF;
   --clr-light-3: #7878A3;
   --clr-light-4: #5C5C7B;
+  --clr-warning: #F87171;
 
   // Gradient
   --gradient-purple-blue: linear-gradient(180deg, rgba(135,126,255,1) 0%, rgba(104,93,255,1) 46%, rgba(49,33,255,1) 100%);
@@ -24,4 +25,14 @@
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
+
+  // Toastify
+  --toastify-color-dark: var(--clr-dark-4);
+  --toastify-icon-color-error: var(--clr-warning);
+  --toastify-color-error: var(--clr-warning);
+  --toastify-font-family: inherit;
+  --toastify-toast-width: 480px;
+  --toastify-toast-min-height: 80px;
+  --toastify-text-color-dark: var(--clr-light-1);
+  --toastify-toast-bd-radius: .625rem;
 }

@@ -3,6 +3,10 @@
 @import 'utils/reset';
 @import 'utils/globals';
 
-// Import Pages
+// Layouts
+@import 'layouts/auth-layout';
+
+// Pages
 
 // Components
+@import 'components/button';
