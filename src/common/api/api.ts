@@ -1,5 +1,5 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { getEnvVariables } from '../helpers';
+import { getEnvVariables } from '../../helpers';
 
 const { VITE_BACKEND_URL, VITE_BACKEND_BASE_API } = getEnvVariables();
 

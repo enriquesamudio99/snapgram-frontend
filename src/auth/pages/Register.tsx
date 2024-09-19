@@ -3,8 +3,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {  SignUpValidation } from '../lib/validation';
-import { Button, FormInput } from '../../components';
-import { useAuth } from '../../hooks';
+import { Button, FormInput } from '../../common/components';
+import { useAuth } from '../../common/hooks';
 import { toast } from 'react-toastify';
 
 const Register = () => {

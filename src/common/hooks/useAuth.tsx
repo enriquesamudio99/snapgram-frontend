@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { useUserContext } from '../context/AuthContext';
+import { useUserContext } from '../../context/AuthContext';
 import { api } from '../api';
 
 interface AuthResponse {

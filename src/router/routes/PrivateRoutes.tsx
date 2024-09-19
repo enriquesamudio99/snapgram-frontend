@@ -1,11 +1,12 @@
 import { MainLayout } from '../../layouts';
+import { Home } from '../../posts/pages';
 
 const privateRoutes = [
   {
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: '', element: <h1>Home</h1> },
+      { path: '', element: <Home /> },
       { path: 'profile', element: <h1>Profile</h1> }
     ]
   }
