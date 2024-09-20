@@ -1,4 +1,12 @@
 .main {
   width: 100%;
   min-height: 100vh;
+  
+  @media (width >= 768px) {
+    display: flex;
+  }
+
+  &-content {
+    flex: 1;
+  }
 }

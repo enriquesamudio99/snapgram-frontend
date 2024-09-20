@@ -1,6 +1,24 @@
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .625rem;
   padding: 1rem 1.25rem;
   background-color: var(--clr-primary);
   font-weight: var(--fw-semibold);
   border-radius: .625rem;
+
+  &--full {
+    width: 100%;
+  }
+
+  &--warning {
+    background-color: var(--clr-warning);
+    color: var(--clr-light-2);
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
 }

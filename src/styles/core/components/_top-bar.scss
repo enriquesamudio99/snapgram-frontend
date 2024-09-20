@@ -1,0 +1,32 @@
+.top-bar {
+  background-color: var(--clr-dark-2);
+  border-bottom: 1px solid var(--clr-dark-4);
+
+  @media (width >= 768px) {
+    display: none;
+  }
+
+  &__container {
+    padding: .75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+  } 
+
+  &__logo-link {
+    width: 137px;
+  }
+
+  &__profile-link {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+  }
+
+  &__btn {
+    background-color: var(--clr-dark-3);
+    padding: .5rem;
+    border-radius: .5rem;
+  }
+}

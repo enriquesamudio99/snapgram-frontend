@@ -1,14 +1,16 @@
 import { Outlet } from 'react-router-dom';
+import { BottomBar, LeftSideBar, RightSideBar, TopBar } from '../common/components';
 
 const MainLayout = () => {
   return (
     <div className="main">
-      <p>TopBar</p>
-      <p>LeftSideBar</p>
+      <TopBar />
+      {/* <LeftSideBar /> */}
       <section className="main-content">
         <Outlet />
       </section>
-      <p>BottomBar</p>
+      {/* <RightSideBar /> */}
+      {/* <BottomBar /> */}
     </div>
   )
 }
