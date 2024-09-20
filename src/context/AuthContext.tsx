@@ -14,7 +14,7 @@ export const INITIAL_USER = {
 export const INITIAL_STATE = {
   user: INITIAL_USER,
   setUser: () => {}, 
-  status: "not-auth",
+  status: "checking",
   setStatus: () => {},
   checking: () => {},
   login: () => {},
