@@ -7,11 +7,14 @@
 @import 'layouts/auth-layout';
 @import 'layouts/main-layout';
 
-// Pages
-
 // Components
 @import 'components/button';
 @import 'components/top-bar';
 @import 'components/mobile-navbar';
 @import 'components/bottom-bar';
 @import 'components/left-sidebar';
+@import 'components/create-post-form';
+@import 'components/file-uploader';
+
+// Pages
+@import 'pages/create-post';

@@ -1,0 +1,80 @@
+.file-uploader {
+
+  &__label {
+    color: var(--clr-light-2);
+    font-weight: var(--fw-medium);
+  }
+
+  &__message {
+    font-size: .875rem;
+    color: var(--clr-warning);
+  }
+
+  &__box {
+    margin-top: .75rem;
+    background-color: var(--clr-dark-3);
+    border-radius: .625rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-title {
+      margin-top: .75rem;
+      font-size: 1.125rem;
+      font-weight: var(--fw-semibold);
+    }
+
+    &-subtitle {
+      margin-top: .5rem;
+      font-size: .75rem;
+      color: var(--clr-light-4);
+    }
+
+    &-btn {
+      margin-top: 1rem;
+      background-color: var(--clr-dark-4);
+      padding: .625rem 1.25rem;
+      border-radius: .625rem;
+      font-size: .75rem;
+      font-weight: var(--fw-semibold);
+    }
+  }
+
+  &__preview {
+    &-title {
+      font-size: 1.125rem;
+      font-weight: var(--fw-semibold);
+    }
+  }
+
+  &__preview-swiper {
+    margin-top: .75rem;
+    width: 100%;
+    height: 480px;
+
+    &-slide {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      &-img {
+        width: 100%;
+        height: 100%;
+        border-radius: .625rem;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      &-remove {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--clr-dark-4);
+        padding: .625rem 1.25rem;
+        font-weight: var(--fw-semibold);
+        border-radius: .625rem;
+      }
+    }
+  }
+}

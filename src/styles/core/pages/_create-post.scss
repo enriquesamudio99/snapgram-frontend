@@ -1,0 +1,19 @@
+.create-post {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 3.75rem;
+
+  &__container {
+    width: 100%;
+    max-width: 630px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    font-size: 2.25rem;
+  }
+}
