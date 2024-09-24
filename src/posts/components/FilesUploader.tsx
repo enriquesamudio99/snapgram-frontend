@@ -8,7 +8,7 @@ type FileUploaderProps = {
   error: string | undefined;
 }
 
-const FileUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps) => {
+const FilesUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const [filesUrls, setFilesUrls] = useState<string[]>(imagesUrl);
 
@@ -118,4 +118,4 @@ const FileUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps)
   )
 }
 
-export default FileUploader
+export default FilesUploader

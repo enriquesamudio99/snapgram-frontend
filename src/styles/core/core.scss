@@ -14,7 +14,10 @@
 @import 'components/bottom-bar';
 @import 'components/left-sidebar';
 @import 'components/create-post-form';
-@import 'components/file-uploader';
+@import 'components/files-uploader';
+@import 'components/post-card';
+@import 'components/post-card-stats';
 
 // Pages
 @import 'pages/create-post';
+@import 'pages/home';

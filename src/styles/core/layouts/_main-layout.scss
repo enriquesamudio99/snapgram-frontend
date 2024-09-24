@@ -16,6 +16,11 @@
 
     &__wrapper {
       flex: 1;
+      padding-bottom: 5rem;
+
+      @media (width >= 768px) {
+        padding-bottom: 0;
+      }
     }
   }
 }

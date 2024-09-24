@@ -1,4 +1,5 @@
-import { IContextType, IUser } from '../types';
+import { useQueryClient } from '@tanstack/react-query';
+import { IContextType, IAuthUser } from '../types';
 import React, { createContext, useContext, useState } from 'react';
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -25,12 +26,13 @@ const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
 const AuthProvider = ({ children } : { children: React.ReactNode }) => {
 
-  const [user, setUser] = useState<IUser>(INITIAL_USER);
+  const queryClient = useQueryClient();
+  const [user, setUser] = useState<IAuthUser>(INITIAL_USER);
   const [status, setStatus] = useState(INITIAL_STATE.status);
 
   const checking = () => setStatus("checking");
 
-  const login = (user: IUser) => {
+  const login = (user: IAuthUser) => {
     setUser({
       id: user.id,
       name: user.name,
@@ -42,6 +44,7 @@ const AuthProvider = ({ children } : { children: React.ReactNode }) => {
   }
 
   const logout = () => {
+    queryClient.removeQueries();
     setUser(INITIAL_USER);
     setStatus("not-auth");
   }

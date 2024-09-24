@@ -1,13 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Button, FormInput } from '../../common/components';
 import { CreatePostValidation } from '../lib/validation';
-import FileUploader from './FilesUploader';
+import { FilesUploader } from './';
 import { usePostMutation } from '../hooks';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const CreatePostForm = () => {
 
@@ -73,7 +72,7 @@ const CreatePostForm = () => {
               control={form.control}
               name="images"
               render={({ field }) => (
-                <FileUploader
+                <FilesUploader
                   fieldChange={field.onChange}
                   error={form.formState.errors.images?.message}
                 />
