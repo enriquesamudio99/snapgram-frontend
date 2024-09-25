@@ -16,7 +16,7 @@ interface AuthResponse {
 }
 
 interface AuthResult {
-  response?: AxiosResponse<AuthResponse>;
+  response?: AuthResponse;
   error?: {
     message?: string;
     data?: {
@@ -47,20 +47,21 @@ const useAuth = () => {
   const startLogin = async (loginData : LoginProps) : Promise<AuthResult> => {
     setIsLoading(true);
     try {
-      const response: AxiosResponse<AuthResponse> = await api.post('/auth/login', loginData);
-      localStorage.setItem("token", response.data.token);
-      login(response.data.user);
+      const { data: responseData }: AxiosResponse<AuthResponse> = await api.post('/auth/login', loginData);
+      localStorage.setItem("token", responseData.token);
+      login(responseData.user);
       return {
-        response
+        response: responseData
       }
     } catch (error: unknown) {
       console.log(error);
       logout();
       if (error instanceof AxiosError) {
+        const { message, response } = error;
         return {
           error: {
-            message: error.message,
-            data: error.response?.data
+            message,
+            data: response?.data
           }
         }
       }
@@ -77,22 +78,23 @@ const useAuth = () => {
   const startRegister = async (registerData : RegisterProps) => {
     setIsLoading(true);
     try {
-      const response : AxiosResponse<AuthResponse> = await api.post('/auth/register', registerData);
+      const { data: responseData } : AxiosResponse<AuthResponse> = await api.post('/auth/register', registerData);
 
-      localStorage.setItem("token", response.data.token);
-      login(response.data.user);
+      localStorage.setItem("token", responseData.token);
+      login(responseData.user);
 
       return {
-        response
+        response: responseData
       }
     } catch (error: unknown) {
       console.log(error);
       logout();
       if (error instanceof AxiosError) {
+        const { message, response } = error;
         return {
           error: {
-            message: error.message,
-            data: error.response?.data
+            message: message,
+            data: response?.data
           }
         }
       }
@@ -119,10 +121,10 @@ const useAuth = () => {
     if (!token) return logout();
 
     try {
-      const { data }: AxiosResponse<AuthResponse> = await api.get('/auth/refresh');
+      const { data: responseData }: AxiosResponse<AuthResponse> = await api.get('/auth/refresh');
       
-      localStorage.setItem("token", data.token);
-      login(data.user);
+      localStorage.setItem("token", responseData.token);
+      login(responseData.user);
     } catch (error) {
       console.log(error);
       logout();

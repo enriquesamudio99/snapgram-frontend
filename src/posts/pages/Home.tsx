@@ -9,7 +9,7 @@ const Home = () => {
     return <p>Loading...</p>
   }
 
-  const posts = followingPostsQuery.data?.response?.data.data;
+  const posts = followingPostsQuery.data?.response?.posts;
 
   return (
     <>

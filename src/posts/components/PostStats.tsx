@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react"
 import { IPost, IAuthUser, ISharedBy } from "../../types"
 import { useGetCurrentUser } from "../../common/hooks";
-import { checkIsLiked } from "../../helpers";
-import { useLikePostMutation, useSavePostMutation, useUnlikePostMutation, useUnsavePostMutation } from "../hooks";
+import { checkIsLiked, checkIsShared } from "../../helpers";
+import { useLikePostMutation, useSavePostMutation, useSharePostMutation, useUnlikePostMutation, useUnsavePostMutation, useUnsharePostMutation } from "../hooks";
 
 const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
 
+  // Mutations
   const likePostMutation = useLikePostMutation();
   const unlikePostMutation = useUnlikePostMutation();
   const savePostMutation = useSavePostMutation();
   const unsavePostMutation = useUnsavePostMutation();
+  const sharePostMutation = useSharePostMutation();
+  const unsharePostMutation = useUnsharePostMutation();
 
+  // Current User
   const { getCurrentUserQuery } = useGetCurrentUser(user.id);
-
   const currentUser = getCurrentUserQuery.data?.response?.data.data;
 
+  const sharedByList = post.sharedBy.map((shared: ISharedBy) => shared.user);
+
   const savedPost = currentUser?.savedPosts?.find((p: string) => p === post._id);
-  const sharedPost = post.sharedBy.find((sharedBy: ISharedBy) => sharedBy.user === user.id);
 
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const [isShared, setIsShared] = useState<boolean>(false);
   const [likes, setLikes] = useState<string[]>(post.likes);
   const [comments,] = useState<string[]>(post.comments);
-  const [shared,] = useState<ISharedBy[]>(post.sharedBy);
+  const [shared, setShared] = useState<string[]>(sharedByList);
 
   useEffect(() => {
     setIsSaved(!!savedPost);
-    setIsShared(!!sharedPost);
-  }, [currentUser, savedPost, sharedPost]);
+  }, [currentUser, savedPost]);
 
   if (getCurrentUserQuery.isLoading) {
     return <p>Loading...</p>;
@@ -45,8 +47,8 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
       await unlikePostMutation.mutateAsync(post._id);
       setLikes(newLikes);
       return;
-    } 
-    
+    }
+
     newLikes.push(user.id);
     await likePostMutation.mutateAsync(post._id);
     setLikes(newLikes);
@@ -65,16 +67,35 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
     await savePostMutation.mutateAsync(post._id);
   }
 
+  const handleSharePost = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    let newShared = [...shared];
+
+    const hasShared = newShared.includes(user.id);
+
+    if (hasShared) {
+      newShared = newShared.filter((id) => id !== user.id);
+      setShared(newShared);
+      await unsharePostMutation.mutateAsync(post._id);
+      return;
+    }
+
+    newShared.push(user.id);    
+    setShared(newShared);
+    await sharePostMutation.mutateAsync(post._id);
+  }
+
   return (
     <div className="post-card-stats">
       <div className="post-card-stats__container">
         <div className="post-card-stats__actions">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={`
               post-card-stats__action 
-              ${likePostMutation.isPending || unlikePostMutation.isPending 
-                ? "post-card-stats__action--disabled" 
+              ${likePostMutation.isPending || unlikePostMutation.isPending
+                ? "post-card-stats__action--disabled"
                 : ""
               }  
             `}
@@ -97,36 +118,49 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
             <p className="post-card-stats__action-text">{comments.length}</p>
           </div>
           {post.author._id !== user.id && (
-            <div className="post-card-stats__action">
+            <button 
+              type="button" 
+              className={`
+                post-card-stats__action 
+                ${sharePostMutation.isPending || unsharePostMutation.isPending
+                  ? "post-card-stats__action--disabled"
+                  : ""
+                }  
+              `}
+              onClick={handleSharePost}
+              disabled={sharePostMutation.isPending || unsharePostMutation.isPending}
+            >
               <img
-                src={isShared ? "/assets/icons/shared.svg" : "/assets/icons/share.svg"}
+                src={checkIsShared(shared, user.id) ? "/assets/icons/shared.svg" : "/assets/icons/share.svg"}
                 alt="Share Icon"
-                onClick={handleLikePost}
+                onClick={handleSharePost}
                 className="post-card-stats__action-img"
               />
               <p className="post-card-stats__action-text">{shared.length}</p>
-            </div>
+            </button>
           )}
         </div>
-        <button 
-          type="button"
-          className={`
+        {post.author._id !== user.id && (
+          <button
+            type="button"
+            className={`
             post-card-stats__saved 
-            ${savePostMutation.isPending || unsavePostMutation.isPending 
-              ? "post-card-stats__saved--disabled" 
-              : ""
-            }  
+            ${savePostMutation.isPending || unsavePostMutation.isPending
+                ? "post-card-stats__saved--disabled"
+                : ""
+              }  
           `}
-          onClick={handleSavePost}
-          disabled={savePostMutation.isPending || unsavePostMutation.isPending}
-        >
-          <img
-            src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
-            alt="Save Icon"
             onClick={handleSavePost}
-            className="post-card-stats__saved-img"
-          />
-        </button>
+            disabled={savePostMutation.isPending || unsavePostMutation.isPending}
+          >
+            <img
+              src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
+              alt="Save Icon"
+              onClick={handleSavePost}
+              className="post-card-stats__saved-img"
+            />
+          </button>
+        )}
       </div>
     </div>
   )

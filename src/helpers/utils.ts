@@ -19,3 +19,7 @@ export function formatDateString(dateString: string) {
 export const checkIsLiked = (likesList: string[], userId: string) => {
   return likesList.includes(userId);
 };
+
+export const checkIsShared = (sharedList: string[], userId: string) => {
+  return sharedList.includes(userId);
+};

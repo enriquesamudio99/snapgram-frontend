@@ -88,7 +88,7 @@ export interface IPostResponse {
 }
 
 export interface IPostResult {
-  response?: AxiosResponse<IPostResponse>;
+  response?: IPostResponse;
   error?: {
     message?: string;
     data?: {
@@ -100,13 +100,13 @@ export interface IPostResult {
 
 export interface IFollowingPostsResponse {
   success: boolean;
-  data: IPost[];
+  posts: IPost[];
   totalPost: number;
   isNext: boolean;
 }
 
 export interface IFollowingPostsResult {
-  response?: AxiosResponse<IFollowingPostsResponse>;
+  response?: IFollowingPostsResponse;
   error?: {
     message?: string;
     data?: {
@@ -121,7 +121,7 @@ export interface ILikePostResponse {
 }
 
 export interface ILikePostResult {
-  response?: AxiosResponse<ILikePostResponse>;
+  response?: ILikePostResponse;
   error?: {
     message?: string;
     data?: {
@@ -136,7 +136,22 @@ export interface ISavePostResponse {
 }
 
 export interface ISavePostResult {
-  response?: AxiosResponse<ISavePostResponse>;
+  response?: ISavePostResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface ISharePostResponse {
+  success: boolean;
+}
+
+export interface ISharePostResult {
+  response?: ISharePostResponse;
   error?: {
     message?: string;
     data?: {
