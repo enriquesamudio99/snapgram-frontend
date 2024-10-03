@@ -1,6 +1,6 @@
 .left-sidebar {
   background-color: var(--clr-dark-2);
-  min-width: 16.875rem;
+  width: auto;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -9,6 +9,10 @@
 
   @media (width >= 768px) {
     display: block;
+  }
+
+  @media (width >= 1024px) {
+    min-width: 16.875rem;
   }
   
   &__container {
@@ -20,19 +24,59 @@
 
   &__logo-link {
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (width >= 1024px) {
+      justify-content: flex-start;
+    }
+  }
+  
+  &__logo-full {
+    display: none;
+    @media (width >= 1024px) {
+      display: block;
+    }
+  }
+
+  &__logo-simple {
+    display: block;
+    width: 36px;
+    height: 36px;
+
+    @media (width >= 1024px) {
+      display: none;
+    }
   }
 
   &__user {
     &-link {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: .625rem;
       margin-top: 2.75rem;
+
+      @media (width >= 1024px) {
+        justify-content: flex-start;
+      }
     }
 
     &-img {
-      width: 56px;
-      height: 56px;
+      width: 36px;
+      height: 36px;
+
+      @media (width >= 1024px) {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    &-info {
+      display: none;
+      @media (width >= 1024px) {
+        display: block;
+      }
     }
 
     &-name {
@@ -84,6 +128,10 @@
 
       &-label {
         font-size: 1.125rem;
+        display: none;
+        @media (width >= 1024px) {
+          display: block;
+        }
       }
     }
   }

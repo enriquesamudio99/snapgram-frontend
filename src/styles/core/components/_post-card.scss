@@ -2,7 +2,11 @@
   border-radius: 1.875rem;
   background-color: var(--clr-dark-2);
   border: 1px solid var(--clr-dark-4);
-  padding: 2.25rem 1.875rem;
+  padding: 1.25rem 1rem;
+
+  @media (width >= 768px) {
+    padding: 2.25rem 1.875rem;
+  }
 
   &__shared-by {
     margin-bottom: 1.25rem;
@@ -17,23 +21,37 @@
     gap: .625rem;
 
     &-img {
-      width: 50px;
-      height: 50px;
+      width: 32px;
+      height: 32px;
+
+      @media (width >= 768px) {
+        width: 50px;
+        height: 50px;
+      }
     }
 
     &-info {
       &-name {
-        font-size: 1.125rem;
-        font-weight: var(--fw-semibold);
+        font-size: 1rem;
+        font-weight: var(--fw-medium);
         color: var(--clr-light-1);
         letter-spacing: -1px;
+        
+        @media (width >= 768px) {
+          font-size: 1.125rem;
+          font-weight: var(--fw-semibold);
+        }
       }
 
       &-date {
-        font-size: .875rem;
+        font-size: .75rem;
         font-weight: var(--fw-medium);
         color: var(--clr-light-3);
         letter-spacing: -1px;
+
+        @media (width >= 768px) {
+          font-size: .875rem;
+        }
       }
     }
   }
@@ -44,16 +62,24 @@
   }
 
   &__caption {
-    font-size: 1rem;
+    font-size: .875rem;
     color: var(--clr-light-2);
+
+    @media (width >= 768px) {
+      font-size: 1rem;
+    }
   }
 
   &__tags {
-    font-size: 1rem;
+    font-size: .875rem;
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     gap: .375rem;
+
+    @media (width >= 768px) {
+      font-size: 1rem;
+    }
   }
 
   &__tag {
@@ -71,9 +97,13 @@
 
 .post-card__swiper {
   width: 100%;
-  height: 520px;
+  height: 300px;
   overflow: hidden;
   border-radius: 1.875rem;
+
+  @media (width >= 768px) {
+    height: 520px;
+  }
 
   &-slide {
     width: 100%; 
@@ -90,9 +120,10 @@
 
   .swiper-pagination-fraction {
     background-color: rgba($color: #000000, $alpha: 0.75);
-    border-radius: .5rem;
-    font-size: .875rem;
-    padding: .375rem .75rem;
+    border-radius: 1rem;
+    font-size: .75rem;
+    padding: .5rem .625rem;
+    line-height: 1;
     font-weight: var(--fw-semibold);
     position: absolute;
     width: auto;
@@ -101,5 +132,10 @@
     right: 1rem;
     left: unset;
     bottom: unset;
+
+    @media (width >= 768px) {
+      font-size: .875rem;
+      padding: .625rem .75rem;
+    }
   }
 }

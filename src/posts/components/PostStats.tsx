@@ -4,8 +4,7 @@ import { useGetCurrentUser } from "../../common/hooks";
 import { checkIsLiked, checkIsShared } from "../../helpers";
 import { useLikePostMutation, useSavePostMutation, useSharePostMutation, useUnlikePostMutation, useUnsavePostMutation, useUnsharePostMutation } from "../hooks";
 
-const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
-
+const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAuthUser, isPostItem?: boolean }) => {
   // Mutations
   const likePostMutation = useLikePostMutation();
   const unlikePostMutation = useUnlikePostMutation();
@@ -18,18 +17,21 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
   const { getCurrentUserQuery } = useGetCurrentUser(user.id);
   const currentUser = getCurrentUserQuery.data?.response?.data.data;
 
-  const sharedByList = post.sharedBy.map((shared: ISharedBy) => shared.user);
-
   const savedPost = currentUser?.savedPosts?.find((p: string) => p === post._id);
 
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const [likes, setLikes] = useState<string[]>(post.likes);
+  const [likes, setLikes] = useState<string[]>([]);
   const [comments,] = useState<string[]>(post.comments);
-  const [shared, setShared] = useState<string[]>(sharedByList);
+  const [shared, setShared] = useState<string[]>([]);
 
   useEffect(() => {
-    setIsSaved(!!savedPost);
-  }, [currentUser, savedPost]);
+    if (post) {
+      setLikes(post.likes);
+      const sharedByList = post.sharedBy.map((shared: ISharedBy) => shared.user);
+      setShared(sharedByList);
+      setIsSaved(!!savedPost);
+    }
+  }, [post, currentUser, savedPost]);
 
   if (getCurrentUserQuery.isLoading) {
     return <p>Loading...</p>;
@@ -84,7 +86,7 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
     newShared.push(user.id);    
     setShared(newShared);
     await sharePostMutation.mutateAsync(post._id);
-  }
+  };
 
   return (
     <div className="post-card-stats">
@@ -117,7 +119,7 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
             />
             <p className="post-card-stats__action-text">{comments.length}</p>
           </div>
-          {post.author._id !== user.id && (
+          {post.author._id !== user.id && !isPostItem && (
             <button 
               type="button" 
               className={`
@@ -133,14 +135,13 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
               <img
                 src={checkIsShared(shared, user.id) ? "/assets/icons/shared.svg" : "/assets/icons/share.svg"}
                 alt="Share Icon"
-                onClick={handleSharePost}
                 className="post-card-stats__action-img"
               />
               <p className="post-card-stats__action-text">{shared.length}</p>
             </button>
           )}
         </div>
-        {post.author._id !== user.id && (
+        {post.author._id !== user.id  && !isPostItem &&  (
           <button
             type="button"
             className={`
@@ -156,7 +157,6 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
             <img
               src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
               alt="Save Icon"
-              onClick={handleSavePost}
               className="post-card-stats__saved-img"
             />
           </button>
@@ -164,6 +164,6 @@ const PostStats = ({ post, user }: { post: IPost, user: IAuthUser }) => {
       </div>
     </div>
   )
-}
+};
 
 export default PostStats;

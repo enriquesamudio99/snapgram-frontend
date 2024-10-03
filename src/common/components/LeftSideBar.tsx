@@ -16,8 +16,13 @@ const LeftSideBar = () => {
         >
           <img
             src="/assets/images/logo.svg"
-            alt=""
-            className="left-sidebar__logo"
+            alt="Logo"
+            className="left-sidebar__logo-full"
+          />
+          <img
+            src="/assets/icons/logo.svg"
+            alt="Snapgram"
+            className="left-sidebar__logo-simple"
           />
         </Link>
         <Link

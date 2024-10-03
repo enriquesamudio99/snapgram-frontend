@@ -98,15 +98,15 @@ export interface IPostResult {
   };
 }
 
-export interface IFollowingPostsResponse {
+export interface IPostsResponse {
   success: boolean;
   posts: IPost[];
   totalPost: number;
   isNext: boolean;
 }
 
-export interface IFollowingPostsResult {
-  response?: IFollowingPostsResponse;
+export interface IPostsResult {
+  response?: IPostsResponse;
   error?: {
     message?: string;
     data?: {
@@ -118,6 +118,7 @@ export interface IFollowingPostsResult {
 
 export interface ILikePostResponse {
   success: boolean;
+  post: IPost;
 }
 
 export interface ILikePostResult {
@@ -148,10 +149,27 @@ export interface ISavePostResult {
 
 export interface ISharePostResponse {
   success: boolean;
+  post: IPost;
 }
 
 export interface ISharePostResult {
   response?: ISharePostResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IGetPostResponse {
+  success: boolean;
+  post: IPost;
+}
+
+export interface IGetPostResult {
+  response?: IGetPostResponse;
   error?: {
     message?: string;
     data?: {

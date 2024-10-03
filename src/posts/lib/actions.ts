@@ -1,15 +1,17 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { api } from "../../common/api";
-import { 
-  IFollowingPostsResponse, 
-  IFollowingPostsResult, 
-  ILikePostResponse, 
-  ILikePostResult, 
-  IPostResponse, 
-  IPostResult, 
-  ISavePostResponse, 
-  ISavePostResult, 
-  ISharePostResponse, 
+import {
+  IPostsResponse,
+  IPostsResult,
+  IGetPostResponse,
+  IGetPostResult,
+  ILikePostResponse,
+  ILikePostResult,
+  IPostResponse,
+  IPostResult,
+  ISavePostResponse,
+  ISavePostResult,
+  ISharePostResponse,
   ISharePostResult
 } from "../../types";
 
@@ -43,7 +45,7 @@ const createPost = async (data: FormData): Promise<IPostResult> => {
   }
 }
 
-const likePost = async (postId: string) : Promise<ILikePostResult> => {
+const likePost = async (postId: string): Promise<ILikePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ILikePostResponse> = await api.patch(`/posts/like/${postId}`);
 
@@ -69,7 +71,7 @@ const likePost = async (postId: string) : Promise<ILikePostResult> => {
   }
 }
 
-const unlikePost = async (postId: string) : Promise<ILikePostResult> => {
+const unlikePost = async (postId: string): Promise<ILikePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ILikePostResponse> = await api.patch(`/posts/unlike/${postId}`);
 
@@ -95,7 +97,7 @@ const unlikePost = async (postId: string) : Promise<ILikePostResult> => {
   }
 }
 
-const savePost = async (postId: string) : Promise<ISavePostResult> => {
+const savePost = async (postId: string): Promise<ISavePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ISavePostResponse> = await api.patch(`/posts/save/${postId}`);
 
@@ -121,7 +123,7 @@ const savePost = async (postId: string) : Promise<ISavePostResult> => {
   }
 }
 
-const unsavePost = async (postId: string) : Promise<ISavePostResult> => {
+const unsavePost = async (postId: string): Promise<ISavePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ISavePostResponse> = await api.patch(`/posts/unsave/${postId}`);
 
@@ -148,7 +150,7 @@ const unsavePost = async (postId: string) : Promise<ISavePostResult> => {
 }
 
 
-const sharePost = async (postId: string) : Promise<ISharePostResult> => {
+const sharePost = async (postId: string): Promise<ISharePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ISharePostResponse> = await api.post(`/posts/share/${postId}`);
 
@@ -174,7 +176,7 @@ const sharePost = async (postId: string) : Promise<ISharePostResult> => {
   }
 }
 
-const unsharePost = async (postId: string) : Promise<ISharePostResult> => {
+const unsharePost = async (postId: string): Promise<ISharePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ISharePostResponse> = await api.post(`/posts/unshare/${postId}`);
 
@@ -200,9 +202,63 @@ const unsharePost = async (postId: string) : Promise<ISharePostResult> => {
   }
 }
 
-const getFollowingPosts = async () : Promise<IFollowingPostsResult>  => {
+const getFollowingPosts = async (): Promise<IPostsResult> => {
+  console.log("fetching");
+  
   try {
-    const { data: responseData }: AxiosResponse<IFollowingPostsResponse> = await api.get('/posts/following');
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get('/posts/following');
+
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const getPostsByUser = async (userId: string) : Promise<IPostsResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts/user/${userId}`);
+
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const getPost = async (postId: string): Promise<IGetPostResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IGetPostResponse> = await api.get(`/posts/${postId}`);
 
     return {
       response: responseData
@@ -234,5 +290,7 @@ export {
   unsavePost,
   sharePost,
   unsharePost,
-  getFollowingPosts
+  getFollowingPosts,
+  getPostsByUser,
+  getPost
 }

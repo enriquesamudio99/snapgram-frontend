@@ -8,12 +8,15 @@ const useSharePostMutation = () => {
 
   const sharePostMutation = useMutation({
     mutationFn: (postId: string) => sharePost(postId),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST, data?.response?.post._id]
+      })
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_FOLLOWING_POSTS]
       })
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_CURRENT_USER]
+        queryKey: [QUERY_KEYS.GET_POSTS_BY_USER, data?.response?.post.author]
       })
     }
   });

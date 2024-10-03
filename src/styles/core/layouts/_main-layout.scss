@@ -11,6 +11,10 @@
     display: flex;
 
     @media (width >= 768px) {
+      padding-left: 6.5rem;
+    }
+
+    @media (width >= 1024px) {
       padding-left: 16.875rem;
     }
 

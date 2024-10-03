@@ -3,6 +3,7 @@ import { IGetCurrentUserResponse, IGetCurrentUserResult } from "../../types";
 import { api } from "../api";
 
 const getCurrentUser = async (userId: string): Promise<IGetCurrentUserResult> => {
+  console.log("getting user");
   try {
     const response: AxiosResponse<IGetCurrentUserResponse> = await api.get(`/users/${userId}`);
 
