@@ -41,6 +41,12 @@ export interface ISharedBy {
   _id: string;
 }
 
+export interface IPostImage {
+  public_id: string;
+  secure_url: string;
+  _id: string;
+}
+
 export interface IPost {
   caption: string;
   location: string;
@@ -50,11 +56,7 @@ export interface IPost {
   community: null;
   comments: string[];
   _id: string;
-  images: [{
-    public_id: string;
-    secure_url: string;
-    _id: string;
-  }];
+  images: IPostImage[];
   sharedBy: ISharedBy[] | [];
   author: {
     _id: string;
@@ -84,7 +86,7 @@ export interface IGetCurrentUserResult {
 
 export interface IPostResponse {
   success: boolean;
-  data: IPost;
+  post: IPost;
 }
 
 export interface IPostResult {

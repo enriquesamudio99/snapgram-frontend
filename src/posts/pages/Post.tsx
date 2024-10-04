@@ -6,13 +6,13 @@ import { Pagination } from "swiper/modules";
 import { formatDateString } from "../../helpers";
 import { PostItem, PostStats } from "../components";
 
-const Post = () => { 
+const Post = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { user } = useAuth();
 
   const { getPostQuery } = useGetPost(postId || "");
-  
+
   const post = getPostQuery.data?.response?.post;
   const { getPostsByUserQuery } = useGetPostsByUser(post?.author?._id || "");
 
@@ -27,7 +27,7 @@ const Post = () => {
 
   const userPosts = getPostsByUserQuery.data?.response?.posts;
   const relatedPosts = userPosts?.filter(post => post._id !== postId);
-  
+
   return (
     <section className="main-content__wrapper">
       <div className="post">
@@ -84,7 +84,7 @@ const Post = () => {
 
               </div>
               <div className="post__card-stats">
-                <PostStats 
+                <PostStats
                   post={post}
                   user={user}
                 />
@@ -95,7 +95,7 @@ const Post = () => {
             <h2 className="post__related-title">More Related Posts</h2>
             <div className="post__related-grid">
               {relatedPosts?.map(post => (
-                <PostItem 
+                <PostItem
                   key={post._id}
                   post={post}
                   user={user}

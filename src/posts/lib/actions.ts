@@ -45,6 +45,36 @@ const createPost = async (data: FormData): Promise<IPostResult> => {
   }
 }
 
+const updatePost = async (postId: string, data: FormData): Promise<IPostResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostResponse> = await api.patch(`/posts/${postId}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+
+    return {
+      response: responseData
+    }
+  } catch (error: unknown) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 const likePost = async (postId: string): Promise<ILikePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<ILikePostResponse> = await api.patch(`/posts/like/${postId}`);
@@ -284,6 +314,7 @@ const getPost = async (postId: string): Promise<IGetPostResult> => {
 
 export {
   createPost,
+  updatePost,
   likePost,
   unlikePost,
   savePost,

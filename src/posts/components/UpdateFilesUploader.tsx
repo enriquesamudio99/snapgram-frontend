@@ -1,25 +1,35 @@
 import { useState, useCallback, useEffect } from 'react';
 import { FileWithPath, useDropzone } from 'react-dropzone';
+import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 type FileUploaderProps = {
   fieldChange: (files: File[]) => void;
   imagesUrl?: string[];
   error: string | undefined;
+  maxFiles: number;
+  setMaxFiles: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const FilesUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps) => {
+const UpdateFilesUploader = ({ fieldChange, imagesUrl = [], error, maxFiles, setMaxFiles }: FileUploaderProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const [filesUrls, setFilesUrls] = useState<string[]>(imagesUrl);
 
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    if (acceptedFiles.length > maxFiles) {
+      toast.error(`You can no longer upload images.`);
+      return;
+    }
+
+    setMaxFiles(maxFiles - acceptedFiles.length);
+
     setFiles((prevFiles) => {
       const updatedFiles = [...prevFiles, ...acceptedFiles];
       const urls = updatedFiles.map((file) => URL.createObjectURL(file));
       setFilesUrls(urls);
       return updatedFiles;
     });
-  }, []);
+  }, [maxFiles, setMaxFiles]);
 
   const removeFile = (index : number) => {
     const updatedFiles = files.filter((_, i) => i !== index);
@@ -29,6 +39,8 @@ const FilesUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps
 
     setFiles(updatedFiles);
     setFilesUrls(updatedUrls);
+ 
+    setMaxFiles((prev) => prev + 1);
     
     fieldChange(updatedFiles);
   };
@@ -117,4 +129,4 @@ const FilesUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps
   )
 }
 
-export default FilesUploader
+export default UpdateFilesUploader

@@ -1,5 +1,10 @@
 import { MainLayout } from '../../layouts';
-import { CreatePost, Home, Post } from '../../posts/pages';
+import { 
+  CreatePost, 
+  UpdatePost,
+  Home, 
+  Post, 
+} from '../../posts/pages';
 
 const privateRoutes = [
   {
@@ -8,7 +13,8 @@ const privateRoutes = [
     children: [
       { path: '', element: <Home /> },
       { path: 'create-post', element: <CreatePost /> },
-      { path: 'post/:postId', element: <Post /> }
+      { path: 'update-post/:postId', element: <UpdatePost /> },
+      { path: 'post/:postId', element: <Post /> },
     ]
   }
 ];

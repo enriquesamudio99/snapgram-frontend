@@ -12,3 +12,14 @@ export const CreatePostValidation = z.object({
     .min(1, { message: "Location must be at least 1 character long" }),
   tags: z.string(),
 });
+
+export const UpdatePostValidation = z.object({
+  caption: z.string()
+    .trim()
+    .min(3, { message: "Caption must be at least 3 characters long" }),
+  images: z.array(z.custom<File>()),
+  location: z.string()
+    .trim()
+    .min(1, { message: "Location must be at least 1 character long" }),
+  tags: z.string()
+});

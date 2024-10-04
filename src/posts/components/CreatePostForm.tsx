@@ -30,10 +30,14 @@ const CreatePostForm = () => {
     const formData = new FormData();
     formData.append("caption", values.caption);
     formData.append("location", values.location);
+    
     for (let i = 0; i < values.images.length; i++) {
       formData.append("images", values.images[i]);
     }
-    formData.append("tags", values.tags);
+
+    if (values.tags !== "") {
+      formData.append("tags", values.tags); 
+    }
 
     const { response, error } = await postMutation.mutateAsync(formData);
     
@@ -121,4 +125,4 @@ const CreatePostForm = () => {
   )
 }
 
-export default CreatePostForm
+export default CreatePostForm;
