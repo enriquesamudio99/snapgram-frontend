@@ -8,5 +8,7 @@ export { useUnsavePostMutation } from './useUnsavePostMutation';
 export { useSharePostMutation } from './useSharePostMutation';
 export { useUnsharePostMutation } from './useUnsharePostMutation'; 
 export { useGetPost } from './useGetPost'; 
+export { useGetPosts } from './useGetPosts'; 
+export { useSearchPosts } from './useSearchPosts'; 
 export { useGetPostsByUser } from './useGetPostsByUser'; 
 export { useDeletePostMutation } from './useDeletePostMutation'; 

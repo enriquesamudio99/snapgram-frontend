@@ -314,10 +314,65 @@ const getPost = async (postId: string): Promise<IGetPostResult> => {
   }
 }
 
+const getPosts = async (): Promise<IPostsResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get("/posts");
+ 
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const searchPosts = async (searchQuery: string): Promise<IPostsResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get("/posts", {
+      params: {
+        searchQuery
+      }
+    });
+ 
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 const deletePost = async (postId: string): Promise<IDeletePostResult> => {
   try {
     const { data: responseData }: AxiosResponse<IDeletePostResponse> = await api.delete(`/posts/${postId}`);
-    console.log(responseData);
 
     return {
       response: responseData
@@ -353,5 +408,7 @@ export {
   getFollowingPosts,
   getPostsByUser,
   getPost,
+  getPosts,
+  searchPosts,
   deletePost
 }

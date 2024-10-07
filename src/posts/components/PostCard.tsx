@@ -9,7 +9,7 @@ import { useMemo } from "react";
 
 const PostCard = ({ post }: { post: IPost }) => {
   const isSharedPost = !!post.originalPost;
-  const postData = useMemo(() => isSharedPost ? post.originalPost : post, [post]);
+  const postData = useMemo(() => isSharedPost ? post.originalPost : post, [post, isSharedPost]);
 
   const { user } = useAuth();
 

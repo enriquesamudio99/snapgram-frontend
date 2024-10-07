@@ -3,7 +3,8 @@ import {
   CreatePost, 
   UpdatePost,
   Home, 
-  Post, 
+  Post,
+  Explore, 
 } from '../../posts/pages';
 
 const privateRoutes = [
@@ -15,6 +16,7 @@ const privateRoutes = [
       { path: 'create-post', element: <CreatePost /> },
       { path: 'update-post/:postId', element: <UpdatePost /> },
       { path: 'post/:postId', element: <Post /> },
+      { path: 'explore', element: <Explore /> }
     ]
   }
 ];

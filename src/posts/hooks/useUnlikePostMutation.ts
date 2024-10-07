@@ -16,6 +16,9 @@ const useUnlikePostMutation = () => {
         queryKey: [QUERY_KEYS.GET_FOLLOWING_POSTS]
       })
       queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POSTS]
+      })
+      queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POSTS_BY_USER, data?.response?.post.author]
       })
     }
