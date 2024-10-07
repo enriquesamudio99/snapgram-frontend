@@ -141,7 +141,7 @@ const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAut
             </button>
           )}
         </div>
-        {post.author._id !== user.id  && !isPostItem &&  (
+        {post.author._id !== user.id && !isPostItem &&  (
           <button
             type="button"
             className={`

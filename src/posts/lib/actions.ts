@@ -12,7 +12,9 @@ import {
   ISavePostResponse,
   ISavePostResult,
   ISharePostResponse,
-  ISharePostResult
+  ISharePostResult,
+  IDeletePostResult,
+  IDeletePostResponse
 } from "../../types";
 
 const createPost = async (data: FormData): Promise<IPostResult> => {
@@ -312,6 +314,33 @@ const getPost = async (postId: string): Promise<IGetPostResult> => {
   }
 }
 
+const deletePost = async (postId: string): Promise<IDeletePostResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IDeletePostResponse> = await api.delete(`/posts/${postId}`);
+    console.log(responseData);
+
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 export {
   createPost,
   updatePost,
@@ -323,5 +352,6 @@ export {
   unsharePost,
   getFollowingPosts,
   getPostsByUser,
-  getPost
+  getPost,
+  deletePost
 }

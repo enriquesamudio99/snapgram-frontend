@@ -1,10 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../common/hooks";
-import { useGetPost, useGetPostsByUser } from "../hooks";
+import { useDeletePostMutation, useGetPost, useGetPostsByUser } from "../hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { formatDateString } from "../../helpers";
 import { PostItem, PostStats } from "../components";
+import { toast } from "react-toastify";
 
 const Post = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Post = () => {
   const { user } = useAuth();
 
   const { getPostQuery } = useGetPost(postId || "");
+  const deletePostMutation = useDeletePostMutation();
 
   const post = getPostQuery.data?.response?.post;
   const { getPostsByUserQuery } = useGetPostsByUser(post?.author?._id || "");
@@ -23,6 +25,18 @@ const Post = () => {
   if (!post) {
     navigate("/");
     return null;
+  }
+
+  const handleDeletePost = async () => {
+    const { response, error } = await deletePostMutation.mutateAsync(post._id);
+
+    if (response) {
+      navigate(-1);
+    }
+
+    if (error) {
+      toast.error(error.message);
+    }
   }
 
   const userPosts = getPostsByUserQuery.data?.response?.posts;
@@ -69,6 +83,31 @@ const Post = () => {
                     </p>
                   </div>
                 </div>
+                {post.author._id === user.id && (
+                  <div className="post__card-actions">
+                    <Link
+                      to={`/update-post/${post._id}`}
+                      className="post__card-actions-edit"
+                    >
+                      <img 
+                        src="/assets/icons/edit-post.svg" 
+                        alt="Edit Post Icon" 
+                        className="post__card-actions-edit-img"
+                      />
+                    </Link>
+                    <button 
+                      type="button"
+                      className="post__card-actions-delete"
+                      onClick={handleDeletePost}
+                    >
+                      <img 
+                        src="/assets/icons/delete.svg" 
+                        alt="Delete Post Icon" 
+                        className="post__card-actions-delete-img"
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="post__card-content">
                 <h3 className="post__card-caption">{post.caption}</h3>

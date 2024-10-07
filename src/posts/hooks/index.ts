@@ -9,3 +9,4 @@ export { useSharePostMutation } from './useSharePostMutation';
 export { useUnsharePostMutation } from './useUnsharePostMutation'; 
 export { useGetPost } from './useGetPost'; 
 export { useGetPostsByUser } from './useGetPostsByUser'; 
+export { useDeletePostMutation } from './useDeletePostMutation'; 

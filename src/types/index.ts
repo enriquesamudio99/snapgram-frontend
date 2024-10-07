@@ -180,3 +180,19 @@ export interface IGetPostResult {
     };
   };
 }
+
+export interface IDeletePostResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface IDeletePostResult {
+  response?: IDeletePostResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
