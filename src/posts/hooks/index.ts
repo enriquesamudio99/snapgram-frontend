@@ -12,3 +12,4 @@ export { useGetPosts } from './useGetPosts';
 export { useSearchPosts } from './useSearchPosts'; 
 export { useGetPostsByUser } from './useGetPostsByUser'; 
 export { useDeletePostMutation } from './useDeletePostMutation'; 
+export { useGetSavedPosts } from './useGetSavedPosts'; 

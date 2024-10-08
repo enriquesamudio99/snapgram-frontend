@@ -5,5 +5,3 @@ export { default as UpdateFilesUploader } from './UpdateFilesUploader';
 export { default as PostCard } from './PostCard';
 export { default as PostStats } from './PostStats';
 export { default as PostItem } from './PostItem';
-export { default as ExploreResults } from './ExploreResults';
-export { default as ExploreSearchResults } from './ExploreSearchResults';

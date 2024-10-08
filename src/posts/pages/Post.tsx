@@ -130,10 +130,11 @@ const Post = () => {
               </div>
             </div>
           </div>
-          <div className="post__related">
+          {relatedPosts && relatedPosts.length > 0 && (
+            <div className="post__related">
             <h2 className="post__related-title">More Related Posts</h2>
             <div className="post__related-grid">
-              {relatedPosts?.map(post => (
+              {relatedPosts.map(post => (
                 <PostItem
                   key={post._id}
                   post={post}
@@ -142,6 +143,7 @@ const Post = () => {
               ))}
             </div>
           </div>
+          )}
         </div>
       </div>
     </section>

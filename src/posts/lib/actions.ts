@@ -235,10 +235,34 @@ const unsharePost = async (postId: string): Promise<ISharePostResult> => {
 }
 
 const getFollowingPosts = async (): Promise<IPostsResult> => {
-  console.log("fetching");
-  
   try {
     const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get('/posts/following');
+
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const getSavedPosts = async (): Promise<IPostsResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get('/posts/saved');
 
     return {
       response: responseData
@@ -406,6 +430,7 @@ export {
   sharePost,
   unsharePost,
   getFollowingPosts,
+  getSavedPosts,
   getPostsByUser,
   getPost,
   getPosts,
