@@ -67,6 +67,25 @@ export interface IPost {
   __v: number;
 }
 
+export interface IGetUsersResponse {
+  success: boolean;
+  users: IUser[];
+  totalUsers: number,
+  nextPage: number | null;
+  hasNextPage: boolean;
+}
+
+export interface IGetUsersResult {
+  response?: IGetUsersResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
 export interface IGetUserResponse {
   success: boolean;
   user: IUser;

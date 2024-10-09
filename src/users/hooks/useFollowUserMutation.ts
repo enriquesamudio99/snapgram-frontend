@@ -14,6 +14,9 @@ const useFollowUserMutation = () => {
         queryKey: [USERS_QUERY_KEYS.GET_USER, data.response?.followingId]
       })
       queryClient.invalidateQueries({
+        queryKey: [USERS_QUERY_KEYS.GET_USERS]
+      })
+      queryClient.invalidateQueries({
         queryKey: [USERS_QUERY_KEYS.GET_USER, data.response?.userId]
       })
       queryClient.invalidateQueries({

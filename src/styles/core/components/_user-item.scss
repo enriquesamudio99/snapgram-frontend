@@ -1,0 +1,52 @@
+.user-item {
+  border-radius: 1.875rem;
+  border: 3px solid var(--clr-dark-3);
+
+  &__container {
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__img {
+    width: 90px;
+    height: 90px;
+  }
+
+  &__name {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: -1px;
+  }
+
+  &__username {
+    margin-top: .5rem;
+    font-size: 1.125rem;
+    font-weight: var(--fw-medium);
+    color: var(--clr-light-3);
+  }
+
+  &__btn {
+    border-radius: .5rem;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    margin-top: 1.25rem;
+    padding: .625rem 2rem;
+    background-color: var(--clr-primary);
+    font-weight: var(--fw-semibold);
+
+    &--unfollow {
+      background-color: var(--clr-warning);
+    }
+  }
+}

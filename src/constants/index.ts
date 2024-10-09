@@ -13,7 +13,7 @@ const leftSideBarLinks = [
   },
   {
     icon: "/assets/icons/people.svg",
-    route: "/all-users",
+    route: "/people",
     value: "people",
     label: "People",
   },
@@ -48,7 +48,7 @@ const mbNavbarLinks = [
     icon: "/assets/icons/people.svg",
     value: "people",
     label: "People",
-    route: "/all-users",
+    route: "/people",
   },
   {
     icon: "/assets/icons/settings.svg",

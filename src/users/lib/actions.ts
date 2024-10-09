@@ -4,10 +4,37 @@ import {
   IFollowUserResult, 
   IGetUserResponse, 
   IGetUserResult, 
+  IGetUsersResponse, 
+  IGetUsersResult, 
   IUnfollowUserResponse, 
   IUnfollowUserResult
 } from "../../types";
 import { api } from "../../common/api";
+
+const getUsers = async () : Promise<IGetUsersResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users");
+
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      return {
+        error: {
+          message: error.message,
+          data: error.response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
 
 const getUser = async (userId: string): Promise<IGetUserResult> => {
   try {
@@ -85,6 +112,7 @@ const unfollowUser = async (userId: string): Promise<IUnfollowUserResult> => {
 }
 
 export {
+  getUsers,
   getUser,
   followUser,
   unfollowUser
