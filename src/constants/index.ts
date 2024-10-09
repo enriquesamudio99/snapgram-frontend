@@ -39,55 +39,49 @@ const leftSideBarLinks = [
 
 const mbNavbarLinks = [
   {
+    icon: "/assets/icons/wallpaper.svg",
     value: "explore",
     label: "Explore",
-    icon: "/assets/icons/wallpaper.svg",
-    route: "/"
+    route: "/explore"
   },
   {
     icon: "/assets/icons/people.svg",
-    route: "/all-users",
     value: "people",
     label: "People",
+    route: "/all-users",
   },
-  // {
-  //   value: "notifications",
-  //   label: "Notifications",
-  //   icon: "/assets/icons/bell.svg",
-  //   route: "/"
-  // },
   {
+    icon: "/assets/icons/settings.svg",
     value: "settings",
     label: "Settings",
-    icon: "/assets/icons/settings.svg",
-    route: "/"
+    route: "/settings"
   }
 ];
 
 const bottomBarLinks = [
   {
     icon: "/assets/icons/home.svg",
-    route: "/",
     value: "home",
     label: "Home",
+    route: "/",
   },
   {
     icon: "/assets/icons/bookmark.svg",
-    route: "/",
     value: "saved",
     label: "Saved",
+    route: "/saved",
   },
   {
     icon: "/assets/icons/users.svg",
-    route: "/",
     value: "communities",
     label: "Communities",
+    route: "/communities",
   },
   {
     icon: "/assets/icons/gallery-add.svg",
-    route: "/",
     value: "create",
     label: "Create",
+    route: "/create-post",
   },
   
 ];

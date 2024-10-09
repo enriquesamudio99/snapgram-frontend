@@ -7,6 +7,7 @@ import {
   Explore, 
   Saved
 } from '../../posts/pages';
+import { Profile } from '../../users/pages';
 
 const privateRoutes = [
   {
@@ -18,7 +19,8 @@ const privateRoutes = [
       { path: 'update-post/:postId', element: <UpdatePost /> },
       { path: 'post/:postId', element: <Post /> },
       { path: 'explore', element: <Explore /> },
-      { path: 'saved', element: <Saved /> }
+      { path: 'saved', element: <Saved /> },
+      { path: 'profile/:userId', element: <Profile /> }
     ]
   }
 ];

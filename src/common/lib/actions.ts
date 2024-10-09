@@ -1,14 +1,13 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { IGetCurrentUserResponse, IGetCurrentUserResult } from "../../types";
+import { IGetUserResponse, IGetUserResult } from "../../types";
 import { api } from "../api";
 
-const getCurrentUser = async (userId: string): Promise<IGetCurrentUserResult> => {
-  console.log("getting user");
+const getCurrentUser = async (): Promise<IGetUserResult> => {
   try {
-    const response: AxiosResponse<IGetCurrentUserResponse> = await api.get(`/users/${userId}`);
+    const { data: responseData }: AxiosResponse<IGetUserResponse> = await api.get("/users/current");
 
     return {
-      response
+      response: responseData
     }
   } catch (error: unknown) {
     console.log(error);

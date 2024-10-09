@@ -25,6 +25,22 @@
     height: 100%;
   }
 
+  &__is-shared {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__carousel {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 24px;
+    height: 24px;
+  }
+
   &__info {
     position: absolute;
     z-index: 10;

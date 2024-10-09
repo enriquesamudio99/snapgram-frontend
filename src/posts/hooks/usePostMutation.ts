@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { QUERY_KEYS } from "../lib/queryKeys";
+import { POSTS_QUERY_KEYS } from "../lib/queryKeys";
 import { createPost } from '../lib/actions';
 
 const usePostMutation = () => {
@@ -10,7 +10,7 @@ const usePostMutation = () => {
     mutationFn: (data: FormData) => createPost(data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_POSTS],
+        queryKey: [POSTS_QUERY_KEYS.GET_POSTS],
       })
     }
   });

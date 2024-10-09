@@ -286,9 +286,13 @@ const getSavedPosts = async (): Promise<IPostsResult> => {
   }
 }
 
-const getPostsByUser = async (userId: string) : Promise<IPostsResult> => {
+const getPostsByUser = async (userId: string, onlyOriginals: boolean = false) : Promise<IPostsResult> => {
   try {
-    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts/user/${userId}`);
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts/user/${userId}`, {
+      params: {
+        onlyOriginals
+      }
+    });
 
     return {
       response: responseData

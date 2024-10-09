@@ -3,7 +3,13 @@ import { mbNavbarLinks } from "../../constants";
 import Button from "./Button";
 import { useAuth } from "../hooks";
 
-const MobileNavBar = ({ isOpen, onClick }: { isOpen: boolean, onClick: () => void }) => {
+interface MobileNavBarProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>; 
+  onClick: () => void;
+}
+
+const MobileNavBar = ({ isOpen, setIsOpen, onClick } : MobileNavBarProps) => {
 
   const { startLogout } = useAuth();
 
@@ -29,7 +35,7 @@ const MobileNavBar = ({ isOpen, onClick }: { isOpen: boolean, onClick: () => voi
               className="mobile-navbar__item"
               key={link.value}
             >
-              <Link to="/" className="mobile-navbar__link">
+              <Link to={link.route} className="mobile-navbar__link" onClick={() => setIsOpen(false)}>
                 <img
                   src={link.icon}
                   alt={`${link.label} Icon`}

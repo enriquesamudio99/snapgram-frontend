@@ -23,3 +23,11 @@ export const checkIsLiked = (likesList: string[], userId: string) => {
 export const checkIsShared = (sharedList: string[], userId: string) => {
   return sharedList.includes(userId);
 };
+
+export const checkFollowing = (followersList: string[], userId: string) => {
+  return followersList.includes(userId);
+};
+
+export const checkIsFollowYou = (followingList: string[], userId: string) => {
+  return followingList.includes(userId);
+};

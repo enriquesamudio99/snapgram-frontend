@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MobileNavBar } from "./";
+import { useAuth } from "../hooks";
 
 const TopBar = () => {
 
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleChangeMbNavbar = () => {
@@ -21,7 +23,7 @@ const TopBar = () => {
               className="top-bar__logo"
             />
           </Link>
-          <Link to="/" className="top-bar__profile-link">
+          <Link to={`/profile/${user.id}`} className="top-bar__profile-link">
             <img
               src="/assets/icons/profile-placeholder.svg"
               alt="User Profile"
@@ -43,6 +45,7 @@ const TopBar = () => {
       </div>
       <MobileNavBar 
         isOpen={isOpen}
+        setIsOpen={setIsOpen}
         onClick={handleChangeMbNavbar}
       />
     </>

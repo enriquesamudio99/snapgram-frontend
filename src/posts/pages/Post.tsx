@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../common/hooks";
-import { useDeletePostMutation, useGetPost, useGetPostsByUser } from "../hooks";
+import { useDeletePostMutation, useGetPost, useGetRelatedPostsByUser } from "../hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { formatDateString } from "../../helpers";
@@ -16,9 +16,9 @@ const Post = () => {
   const deletePostMutation = useDeletePostMutation();
 
   const post = getPostQuery.data?.response?.post;
-  const { getPostsByUserQuery } = useGetPostsByUser(post?.author?._id || "");
+  const { getRelatedPostsByUserQuery } = useGetRelatedPostsByUser(post?.author?._id || "", true);
 
-  if (getPostQuery.isLoading || getPostsByUserQuery.isLoading) {
+  if (getPostQuery.isLoading || getRelatedPostsByUserQuery.isLoading) {
     return <p>Loading...</p>;
   }
 
@@ -39,7 +39,7 @@ const Post = () => {
     }
   }
 
-  const userPosts = getPostsByUserQuery.data?.response?.posts;
+  const userPosts = getRelatedPostsByUserQuery.data?.response?.posts;
   const relatedPosts = userPosts?.filter(post => post._id !== postId);
 
   return (
@@ -70,39 +70,41 @@ const Post = () => {
             </div>
             <div className="post__card-info">
               <div className="post__card-header">
-                <div className="post__card-user">
-                  <img
-                    src="/assets/icons/profile-placeholder.svg"
-                    alt={`${post.author.username} Profile`}
-                    className="post__card-user-img"
-                  />
-                  <div className="post__card-user-info">
-                    <h2 className="post__card-user-info-name">{post.author.name}</h2>
-                    <p className="post__card-user-info-date">
-                      {formatDateString(post.createdAt.toString())} - {post.location}
-                    </p>
+                <Link to={`/profile/${post.author._id}`}>
+                  <div className="post__card-user">
+                    <img
+                      src="/assets/icons/profile-placeholder.svg"
+                      alt={`${post.author.username} Profile`}
+                      className="post__card-user-img"
+                    />
+                    <div className="post__card-user-info">
+                      <h2 className="post__card-user-info-name">{post.author.name}</h2>
+                      <p className="post__card-user-info-date">
+                        {formatDateString(post.createdAt.toString())} - {post.location}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
                 {post.author._id === user.id && (
                   <div className="post__card-actions">
                     <Link
                       to={`/update-post/${post._id}`}
                       className="post__card-actions-edit"
                     >
-                      <img 
-                        src="/assets/icons/edit-post.svg" 
-                        alt="Edit Post Icon" 
+                      <img
+                        src="/assets/icons/edit-post.svg"
+                        alt="Edit Post Icon"
                         className="post__card-actions-edit-img"
                       />
                     </Link>
-                    <button 
+                    <button
                       type="button"
                       className="post__card-actions-delete"
                       onClick={handleDeletePost}
                     >
-                      <img 
-                        src="/assets/icons/delete.svg" 
-                        alt="Delete Post Icon" 
+                      <img
+                        src="/assets/icons/delete.svg"
+                        alt="Delete Post Icon"
                         className="post__card-actions-delete-img"
                       />
                     </button>
@@ -132,17 +134,17 @@ const Post = () => {
           </div>
           {relatedPosts && relatedPosts.length > 0 && (
             <div className="post__related">
-            <h2 className="post__related-title">More Related Posts</h2>
-            <div className="post__related-grid">
-              {relatedPosts.map(post => (
-                <PostItem
-                  key={post._id}
-                  post={post}
-                  user={user}
-                />
-              ))}
+              <h2 className="post__related-title">More Related Posts</h2>
+              <div className="post__related-grid">
+                {relatedPosts.map(post => (
+                  <PostItem
+                    key={post._id}
+                    post={post}
+                    user={user}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
           )}
         </div>
       </div>

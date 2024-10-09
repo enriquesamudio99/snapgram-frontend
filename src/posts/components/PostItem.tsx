@@ -25,16 +25,32 @@ const PostItem = ({ post, user, showUser = true, showStats = true }: PostItemPro
             className="post-item__img"
           />
         </Link>
+        {isSharedPost && (
+          <img 
+            src="/assets/icons/white-shared.svg"
+            alt="Share Icon"
+            className="post-item__is-shared"
+          />
+        )}
+        {post.images.length > 1 && (
+          <img 
+            src="/assets/icons/carousel.svg"
+            alt="Carousel Icon"
+            className="post-item__carousel"
+          />
+        )}
         <div className="post-item__info">
           {showUser && (
-            <div className="post-item__user">
-              <img
-                src="/assets/icons/profile-placeholder.svg"
-                alt="User Profile"
-                className="post-item__user-img"
-              />
-              <p className="post-item__user-username">@{postData.author.username}</p>
-            </div>
+            <Link to={`/profile/${postData.author._id}`}>
+              <div className="post-item__user">
+                <img
+                  src="/assets/icons/profile-placeholder.svg"
+                  alt="User Profile"
+                  className="post-item__user-img"
+                />
+                <p className="post-item__user-username">@{postData.author.username}</p>
+              </div>
+            </Link>
           )}
           {showStats && (
             <PostStats

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../lib/queryKeys";
+import { POSTS_QUERY_KEYS } from "../lib/queryKeys";
 import { deletePost } from '../lib/actions';
 
 const useDeletePostMutation = () => {
@@ -10,7 +10,7 @@ const useDeletePostMutation = () => {
     mutationFn: (postId: string) => deletePost(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_FOLLOWING_POSTS]
+        queryKey: [POSTS_QUERY_KEYS.GET_FOLLOWING_POSTS]
       })
     }
   });

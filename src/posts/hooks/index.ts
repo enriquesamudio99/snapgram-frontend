@@ -11,5 +11,6 @@ export { useGetPost } from './useGetPost';
 export { useGetPosts } from './useGetPosts'; 
 export { useSearchPosts } from './useSearchPosts'; 
 export { useGetPostsByUser } from './useGetPostsByUser'; 
+export { useGetRelatedPostsByUser } from './useGetRelatedPostsByUser'; 
 export { useDeletePostMutation } from './useDeletePostMutation'; 
 export { useGetSavedPosts } from './useGetSavedPosts'; 

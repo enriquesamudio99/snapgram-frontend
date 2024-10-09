@@ -14,8 +14,8 @@ const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAut
   const unsharePostMutation = useUnsharePostMutation();
 
   // Current User
-  const { getCurrentUserQuery } = useGetCurrentUser(user.id);
-  const currentUser = getCurrentUserQuery.data?.response?.data.data;
+  const { getCurrentUserQuery } = useGetCurrentUser();
+  const currentUser = getCurrentUserQuery.data?.response?.user;
 
   const savedPost = currentUser?.savedPosts?.find((p: string) => p === post._id);
 

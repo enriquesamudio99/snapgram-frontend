@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { QUERY_KEYS } from "../lib/queryKeys";
+import { POSTS_QUERY_KEYS } from "../lib/queryKeys";
+import { COMMON_QUERY_KEYS } from "../../common/lib/queryKeys";
 import { savePost } from '../lib/actions';
 
 const useSavePostMutation = () => {
@@ -10,13 +11,13 @@ const useSavePostMutation = () => {
     mutationFn: (postId: string) => savePost(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_FOLLOWING_POSTS]
+        queryKey: [POSTS_QUERY_KEYS.GET_FOLLOWING_POSTS]
       })
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_CURRENT_USER]
+        queryKey: [COMMON_QUERY_KEYS.GET_CURRENT_USER]
       })
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_SAVED_POSTS]
+        queryKey: [POSTS_QUERY_KEYS.GET_SAVED_POSTS]
       })
     }
   });

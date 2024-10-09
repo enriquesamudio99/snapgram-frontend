@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import React from 'react';
 
 export interface IContextType {
@@ -68,13 +67,47 @@ export interface IPost {
   __v: number;
 }
 
-export interface IGetCurrentUserResponse {
+export interface IGetUserResponse {
   success: boolean;
-  data: IUser;
+  user: IUser;
 }
 
-export interface IGetCurrentUserResult {
-  response?: AxiosResponse<IGetCurrentUserResponse>;
+export interface IGetUserResult {
+  response?: IGetUserResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IFollowUserResponse {
+  success: boolean;
+  userId: string;
+  followingId: string;
+}
+
+export interface IFollowUserResult {
+  response?: IFollowUserResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IUnfollowUserResponse {
+  success: boolean;
+  userId: string;
+  unfollowingId: string;
+}
+
+export interface IUnfollowUserResult {
+  response?: IUnfollowUserResponse;
   error?: {
     message?: string;
     data?: {

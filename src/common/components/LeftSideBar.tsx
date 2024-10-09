@@ -26,7 +26,7 @@ const LeftSideBar = () => {
           />
         </Link>
         <Link
-          to="/"
+          to={`/profile/${user.id}`}
           className="left-sidebar__user-link"
         >
           <img
