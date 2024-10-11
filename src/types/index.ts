@@ -248,3 +248,56 @@ export interface IDeletePostResult {
     };
   };
 }
+
+export interface ICommunity {
+  image: {
+    public_id: string;
+    secure_url: string;
+  };
+  name:          string;
+  username:      string;
+  bio:           string;
+  posts:         string[];
+  members:       string[];
+  communityType: string;
+  _id:           string;
+  createdBy:     string;
+  createdAt:     Date;
+  updatedAt:     Date;
+  __v:           number;
+}
+
+export interface ICommunityResponse {
+  success: boolean;
+  community: ICommunity;
+}
+
+export interface ICommunityResult {
+  response?: ICommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface ICommunitiesResponse {
+  success: boolean;
+  communities: ICommunity[];
+  totalCommunities: number;
+  nextPage: number | null;
+  hasNextPage: boolean;
+}
+
+export interface ICommunitiesResult {
+  response?: ICommunitiesResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}

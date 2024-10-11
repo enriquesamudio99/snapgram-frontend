@@ -43,7 +43,7 @@ const CreatePostForm = () => {
     
     if (response) {
       toast.success("Post created sucessfully");
-      navigate("/");
+      navigate("/explore");
     }
 
     if (error) {

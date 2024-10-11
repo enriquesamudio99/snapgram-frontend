@@ -25,11 +25,17 @@ body {
     font-weight: var(--fw-medium);
   }
 
-  &__input {
+  &__input,
+  &__textarea {
     padding: 1rem 1.25rem;
     background-color: var(--clr-dark-3);
     font-weight: var(--fw-semibold);
     border-radius: .625rem;
+  }
+
+  &__textarea {
+    resize: none;
+    min-height: 200px;
   }
 
   &__message {

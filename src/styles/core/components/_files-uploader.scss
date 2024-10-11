@@ -77,4 +77,31 @@
       }
     }
   }
+
+  &__preview-profile {
+    margin-top: .75rem;
+    padding: 3rem 1.25rem;
+    background-color: var(--clr-dark-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .625rem;
+    position: relative;
+
+    &-img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+    }
+
+    &-remove {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--clr-dark-4);
+      padding: .625rem 1.25rem;
+      font-weight: var(--fw-semibold);
+      border-radius: .625rem;
+    }
+  }
 }
