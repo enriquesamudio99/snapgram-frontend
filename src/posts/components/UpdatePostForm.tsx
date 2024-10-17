@@ -11,7 +11,7 @@ import { useUpdatePostMutation } from '../hooks';
 import { IPost } from '../../types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const UpdatePostForm = ({ post }: { post: IPost }) => {
+const UpdatePostForm = ({ post, communityId }: { post: IPost, communityId?: string | null }) => {
 
   const MAX_FILES_NUMBER = 10;
 
@@ -33,7 +33,6 @@ const UpdatePostForm = ({ post }: { post: IPost }) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof UpdatePostValidation>) {
-    console.log(values);
     
     if (maxFiles === MAX_FILES_NUMBER) {
       toast.error("You must have at least one image");
@@ -64,8 +63,13 @@ const UpdatePostForm = ({ post }: { post: IPost }) => {
     const { response, error } = await updatePostMutation.mutateAsync(formData);
 
     if (response) {
-      toast.success("Post updated sucessfully");
-      navigate("/");
+      if (communityId) {
+        toast.success("Community post updated sucessfully");
+        navigate(`/community/${communityId}`);
+      } else {
+        toast.success("Post updated sucessfully");
+        navigate("/");
+      }
     }
 
     if (error) {

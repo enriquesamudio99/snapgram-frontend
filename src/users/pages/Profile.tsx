@@ -51,7 +51,7 @@ const Profile = () => {
   const [following, setFollowing] = useState<string[]>([]);
 
   const user = getUserQuery.data?.response?.user;
-  const { getPostsByUserQuery } = useGetPostsByUser(user?._id || "");
+  const { getPostsByUserQuery } = useGetPostsByUser(user?._id || null);
 
   useEffect(() => {
     if (user) {
@@ -171,7 +171,6 @@ const Profile = () => {
       </div>
       </div>
     </section>
-
   )
 }
 

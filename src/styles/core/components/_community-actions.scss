@@ -1,0 +1,24 @@
+.community-actions {
+  &__join-btn,
+  &__leave-btn,
+  &__request-btn,
+  &__delete-request-btn {
+    padding: .625rem 1.25rem;
+    font-weight: var(--fw-semibold);
+    border-radius: .5rem;
+
+    @media (width >= 768px) {
+      margin-top: .375rem;
+    }
+  }
+
+  &__join-btn,
+  &__request-btn {
+    background-color: var(--clr-primary);
+  }
+
+  &__leave-btn,
+  &__delete-request-btn {
+    background-color: var(--clr-warning);
+  }
+}

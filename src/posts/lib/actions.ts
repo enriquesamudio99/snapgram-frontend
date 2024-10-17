@@ -47,6 +47,36 @@ const createPost = async (data: FormData): Promise<IPostResult> => {
   }
 }
 
+const createCommunityPost = async (data: FormData, communityId: string | null): Promise<IPostResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IPostResponse> = await api.post(`/posts/community/${communityId}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+
+    return {
+      response: responseData
+    }
+  } catch (error: unknown) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 const updatePost = async (postId: string, data: FormData): Promise<IPostResult> => {
   try {
     const { data: responseData }: AxiosResponse<IPostResponse> = await api.patch(`/posts/${postId}`, data, {
@@ -286,7 +316,7 @@ const getSavedPosts = async (): Promise<IPostsResult> => {
   }
 }
 
-const getPostsByUser = async (userId: string, onlyOriginals: boolean = false) : Promise<IPostsResult> => {
+const getPostsByUser = async (userId: string | null, onlyOriginals: boolean = false) : Promise<IPostsResult> => {
   try {
     const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts/user/${userId}`, {
       params: {
@@ -426,6 +456,7 @@ const deletePost = async (postId: string): Promise<IDeletePostResult> => {
 
 export {
   createPost,
+  createCommunityPost,
   updatePost,
   likePost,
   unlikePost,

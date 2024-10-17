@@ -9,6 +9,7 @@ import { useMemo } from "react";
 
 const PostCard = ({ post }: { post: IPost }) => {
   const isSharedPost = !!post.originalPost;
+  const isCommunityPost = !!post.community;
   const postData = useMemo(() => isSharedPost ? post.originalPost : post, [post, isSharedPost]);
 
   const { user } = useAuth();
@@ -16,7 +17,7 @@ const PostCard = ({ post }: { post: IPost }) => {
   return (
     <div className="post-card">
       <div className="post-card__container">
-        <Link to={`/post/${postData._id}`}>
+        <Link to={`${isCommunityPost ? `/community/${postData.community?._id}/post/${postData._id}` : `/post/${postData._id}`}`}>
           {isSharedPost && (
             <p className="post-card__shared-by">Shared by: {post.author.name}</p>
           )}
@@ -31,6 +32,19 @@ const PostCard = ({ post }: { post: IPost }) => {
               <p className="post-card__user-info-date">
                 {formatDateString(postData.createdAt.toString())} - {postData.location}
               </p>
+              {isCommunityPost && (
+                <Link to={`/community/${postData.community?._id}`}>
+                  <p className="post-card__user-info-community">
+                    <img
+                      src={`${post.community?.image?.secure_url ? post.community.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
+                      className="post-card__user-info-community-img"
+                    />
+                    <span>
+                      {post.community?.name} Community
+                    </span>
+                  </p>
+                </Link>
+              )}
             </div>
           </div>
           <div className="post-card__content">
@@ -72,6 +86,7 @@ const PostCard = ({ post }: { post: IPost }) => {
           <PostStats
             post={postData}
             user={user}
+            isCommunity={isCommunityPost}
           />
         </div>
       </div>

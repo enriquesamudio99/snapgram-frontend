@@ -1,0 +1,28 @@
+.community-tabs {
+  &__list {
+    display: inline-flex;
+    border: 1px solid var(--clr-dark-3);
+    border-radius: .625rem;
+    overflow: hidden;
+  }
+
+  &__item {
+    &-btn {
+      padding: .75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: var(--fw-medium);
+
+      &--active {
+        background-color: var(--clr-dark-3);
+      }
+
+      @media (width >= 768px) {
+        padding: .75rem 3.125rem;
+      }
+    }
+  }
+
+  &__content {
+    margin-top: 3.5rem;
+  }
+}

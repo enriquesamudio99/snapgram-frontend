@@ -1,4 +1,5 @@
 export { usePostMutation } from './usePostMutation';
+export { useCommunityPostMutation } from './useCommunityPostMutation';
 export { useUpdatePostMutation } from './useUpdatePostMutation';
 export { useGetFollowingPosts } from './useGetFollowingPosts';
 export { useLikePostMutation } from './useLikePostMutation';

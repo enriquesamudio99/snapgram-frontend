@@ -6,12 +6,12 @@ import { toast } from 'react-toastify';
 import { Button, FormInput } from '../../common/components';
 import { CreatePostValidation } from '../lib/validation';
 import { FilesUploader } from './';
-import { usePostMutation } from '../hooks';
+import { useCommunityPostMutation, usePostMutation } from '../hooks';
 
-const CreatePostForm = () => {
-
+const CreatePostForm = ({ communityId = null }: { communityId?: string | null }) => {
   const navigate = useNavigate();
   const postMutation = usePostMutation();
+  const communityPostMutation = useCommunityPostMutation(communityId);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof CreatePostValidation>>({
@@ -30,24 +30,37 @@ const CreatePostForm = () => {
     const formData = new FormData();
     formData.append("caption", values.caption);
     formData.append("location", values.location);
-    
+
     for (let i = 0; i < values.images.length; i++) {
       formData.append("images", values.images[i]);
     }
 
     if (values.tags !== "") {
-      formData.append("tags", values.tags); 
+      formData.append("tags", values.tags);
     }
 
-    const { response, error } = await postMutation.mutateAsync(formData);
-    
-    if (response) {
-      toast.success("Post created sucessfully");
-      navigate("/explore");
-    }
+    if (communityId) { 
+      const { response, error } = await communityPostMutation.mutateAsync(formData);
 
-    if (error) {
-      toast.error(error.data?.error);
+      if (response) {
+        toast.success("Community post created sucessfully");
+        navigate(`/community/${communityId}`);
+      }
+
+      if (error) {
+        toast.error(error.data?.error);
+      }
+    } else {
+      const { response, error } = await postMutation.mutateAsync(formData);
+
+      if (response) {
+        toast.success("Post created sucessfully");
+        navigate("/explore");
+      }
+
+      if (error) {
+        toast.error(error.data?.error);
+      }
     }
 
   }
@@ -116,7 +129,7 @@ const CreatePostForm = () => {
           <Button
             type="submit"
             title="Create Post"
-            isLoading={postMutation.isPending}
+            isLoading={communityId ? communityPostMutation.isPending : postMutation.isPending}
             loadingTitle="Creating Post..."
           />
         </div>

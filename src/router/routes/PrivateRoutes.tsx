@@ -1,4 +1,4 @@
-import { Communities, CreateCommunity } from '../../communities/pages';
+import { Communities, Community, CommunityPost, CreateCommunity, CreateCommunityPost, UpdateCommunityPost } from '../../communities/pages';
 import { MainLayout } from '../../layouts';
 import { 
   CreatePost, 
@@ -28,6 +28,10 @@ const privateRoutes = [
       // Communities
       { path: 'communities', element: <Communities /> },
       { path: 'create-community', element: <CreateCommunity /> },
+      { path: 'community/:communityId', element: <Community /> },
+      { path: 'community/:communityId/create-post', element: <CreateCommunityPost /> },
+      { path: 'community/:communityId/update-post/:postId', element: <UpdateCommunityPost /> },
+      { path: 'community/:communityId/post/:postId', element: <CommunityPost /> },
     ]
   }
 ];

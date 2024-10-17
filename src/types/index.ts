@@ -52,7 +52,15 @@ export interface IPost {
   tags: string[];
   likes: string[];
   originalPost: IPost;
-  community: null;
+  community: null | {
+    image: {
+      public_id: string;
+      secure_url: string;
+      _id: string;
+    };
+    name: string;
+    _id: string;
+  };
   comments: string[];
   _id: string;
   images: IPostImage[];
@@ -235,7 +243,7 @@ export interface IGetPostResult {
 
 export interface IDeletePostResponse {
   success: boolean;
-  message: string;
+  post: IPost;
 }
 
 export interface IDeletePostResult {
@@ -254,17 +262,18 @@ export interface ICommunity {
     public_id: string;
     secure_url: string;
   };
-  name:          string;
-  username:      string;
-  bio:           string;
-  posts:         string[];
-  members:       string[];
+  name: string;
+  username: string;
+  bio: string;
+  posts: string[];
+  members: string[];
+  membersRequests: string[];
   communityType: string;
-  _id:           string;
-  createdBy:     string;
-  createdAt:     Date;
-  updatedAt:     Date;
-  __v:           number;
+  _id: string;
+  createdBy: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
 }
 
 export interface ICommunityResponse {
@@ -293,6 +302,118 @@ export interface ICommunitiesResponse {
 
 export interface ICommunitiesResult {
   response?: ICommunitiesResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IJoinCommunityResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IJoinCommunityResult {
+  response?: IJoinCommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface ILeaveCommunityResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface ILeaveCommunityResult {
+  response?: ILeaveCommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IRequestCommunityResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IRequestCommunityResult {
+  response?: IRequestCommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IDeleteRequestCommunityResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IDeleteRequestCommunityResult {
+  response?: IDeleteRequestCommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IAcceptMemberResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IAcceptMemberResult {
+  response?: IAcceptMemberResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IDenyMemberResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IDenyMemberResult {
+  response?: IDenyMemberResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IDeleteMemberResponse {
+  success: boolean;
+  communityId: string;
+}
+
+export interface IDeleteMemberResult {
+  response?: IDeleteMemberResponse;
   error?: {
     message?: string;
     data?: {

@@ -31,3 +31,11 @@ export const checkFollowing = (followersList: string[], userId: string) => {
 export const checkIsFollowYou = (followingList: string[], userId: string) => {
   return followingList.includes(userId);
 };
+
+export const checkMembership = (membersList: string[], userId: string) => {
+  return membersList.includes(userId);
+};
+
+export const checkMemberRequest = (membersRequestList: string[], userId: string) => {
+  return membersRequestList.includes(userId);
+};

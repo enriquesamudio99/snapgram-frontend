@@ -1,4 +1,4 @@
-.user-item {
+.request-user-item {
   border-radius: 1.875rem;
   border: 3px solid var(--clr-dark-3);
 
@@ -36,27 +36,24 @@
     color: var(--clr-light-3);
   }
 
+  &__btns {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+  }
+
   &__btn {
     border-radius: .5rem;
     font-size: .875rem;
     line-height: 1.125rem;
-    margin-top: 1.25rem;
-    padding: .625rem 2rem;
+    padding: .625rem 1.5rem;
     background-color: var(--clr-primary);
     font-weight: var(--fw-semibold);
 
-    &--unfollow {
+    &--warning {
       background-color: var(--clr-warning);
     }
-  }
-
-  &__delete-member-btn {
-    border-radius: .5rem;
-    font-size: .875rem;
-    line-height: 1.125rem;
-    margin-top: 1.25rem;
-    padding: .625rem 2rem;
-    background-color: var(--clr-warning);
-    font-weight: var(--fw-semibold);
   }
 }

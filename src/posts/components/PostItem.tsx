@@ -8,9 +8,10 @@ interface PostItemProps {
   user: IAuthUser;
   showUser?: boolean;
   showStats?: boolean;
+  isCommunity?: boolean;
 }
 
-const PostItem = ({ post, user, showUser = true, showStats = true }: PostItemProps) => {
+const PostItem = ({ post, user, showUser = true, showStats = true, isCommunity = false }: PostItemProps) => {
 
   const isSharedPost = !!post.originalPost;
   const postData = useMemo(() => isSharedPost ? post.originalPost : post, [post, isSharedPost]);
@@ -18,7 +19,7 @@ const PostItem = ({ post, user, showUser = true, showStats = true }: PostItemPro
   return (
     <div className="post-item">
       <div className="post-item__container">
-        <Link to={`/post/${postData._id}`}>
+        <Link to={`${isCommunity ? `/community/${postData.community}/post/${postData._id}` : `/post/${postData._id}`}`}>
           <img
             src={postData.images[0].secure_url}
             alt="First Post Image"

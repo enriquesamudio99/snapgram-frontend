@@ -53,6 +53,23 @@
           font-size: .875rem;
         }
       }
+
+      &-community {
+        margin-top: .25rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        font-size: .875rem;
+        font-weight: var(--fw-medium);
+        color: var(--clr-light-3);
+        letter-spacing: -1px;
+
+        &-img {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 

@@ -4,7 +4,14 @@ import { useGetCurrentUser } from "../../common/hooks";
 import { checkIsLiked, checkIsShared } from "../../helpers";
 import { useLikePostMutation, useSavePostMutation, useSharePostMutation, useUnlikePostMutation, useUnsavePostMutation, useUnsharePostMutation } from "../hooks";
 
-const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAuthUser, isPostItem?: boolean }) => {
+interface PostsStatsProps {
+  post: IPost;
+  user: IAuthUser;
+  isPostItem?: boolean;
+  isCommunity?: boolean;
+}
+
+const PostStats = ({ post, user, isPostItem = false, isCommunity = false }: PostsStatsProps) => {
   // Mutations
   const likePostMutation = useLikePostMutation();
   const unlikePostMutation = useUnlikePostMutation();
@@ -119,7 +126,7 @@ const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAut
             />
             <p className="post-card-stats__action-text">{comments.length}</p>
           </div>
-          {post.author._id !== user.id && !isPostItem && (
+          {post.author._id !== user.id && !isPostItem && !isCommunity && (
             <button 
               type="button" 
               className={`
@@ -141,7 +148,7 @@ const PostStats = ({ post, user, isPostItem = false }: { post: IPost, user: IAut
             </button>
           )}
         </div>
-        {post.author._id !== user.id && !isPostItem &&  (
+        {post.author._id !== user.id && !isPostItem && !isCommunity &&  (
           <button
             type="button"
             className={`
