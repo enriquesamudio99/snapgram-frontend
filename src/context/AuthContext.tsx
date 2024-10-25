@@ -7,6 +7,7 @@ export const INITIAL_USER = {
   id: '',
   name: '',
   username: '',
+  image: null,
   email: '',
   bio: ''
 }
@@ -37,6 +38,7 @@ const AuthProvider = ({ children } : { children: React.ReactNode }) => {
       id: user.id,
       name: user.name,
       username: user.username,
+      image: user.image,
       email: user.email,
       bio: user.bio
     });

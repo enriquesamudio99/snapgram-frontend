@@ -73,7 +73,7 @@ const Post = () => {
                 <Link to={`/profile/${post.author._id}`}>
                   <div className="post__card-user">
                     <img
-                      src="/assets/icons/profile-placeholder.svg"
+                      src={`${post.author.image?.secure_url ? post.author.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
                       alt={`${post.author.username} Profile`}
                       className="post__card-user-img"
                     />

@@ -30,7 +30,7 @@ const LeftSideBar = () => {
           className="left-sidebar__user-link"
         >
           <img
-            src="/assets/icons/profile-placeholder.svg"
+            src={`${user.image ? user.image : "/assets/icons/profile-placeholder.svg"}`}
             alt={`${user.name} Picture`}
             className="left-sidebar__user-img"
           />

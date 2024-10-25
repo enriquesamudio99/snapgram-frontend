@@ -10,6 +10,7 @@ interface AuthResponse {
     id: string;
     name: string;
     username: string;
+    image: string | null;
     email: string;
     bio: string;
   };
@@ -41,7 +42,7 @@ interface RegisterProps {
 
 const useAuth = () => {
 
-  const { user, status, checking, login, logout } = useUserContext();
+  const { user, setUser, status, checking, login, logout } = useUserContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const startLogin = async (loginData : LoginProps) : Promise<AuthResult> => {
@@ -133,6 +134,7 @@ const useAuth = () => {
 
   return {
     user,
+    setUser,
     status,
     startLogin,
     startRegister,

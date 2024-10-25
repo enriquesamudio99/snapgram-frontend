@@ -16,7 +16,7 @@ const CommunityPost = () => {
 
   const { getPostQuery } = useGetPost(postId || "");
   const { getCommunityQuery } = useGetCommunity(communityId || null);
-  
+
 
   const post = getPostQuery.data?.response?.post;
   const community = getCommunityQuery.data?.response?.community;
@@ -75,32 +75,34 @@ const CommunityPost = () => {
             </div>
             <div className="community-post__card-info">
               <div className="community-post__card-header">
-                <Link to={`/profile/${post.author._id}`}>
-                  <div className="community-post__card-user">
+                <div className="community-post__card-user">
+                  <Link to={`/profile/${post.author._id}`}>
                     <img
-                      src="/assets/icons/profile-placeholder.svg"
+                      src={`${post.author.image?.secure_url ? post.author.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
                       alt={`${post.author.username} Profile`}
                       className="community-post__card-user-img"
                     />
-                    <div className="community-post__card-user-info">
+                  </Link>
+                  <div className="community-post__card-user-info">
+                    <Link to={`/profile/${post.author._id}`}>
                       <h2 className="community-post__card-user-info-name">{post.author.name}</h2>
-                      <p className="community-post__card-user-info-date">
-                        {formatDateString(post.createdAt.toString())} - {post.location}
+                    </Link>
+                    <p className="community-post__card-user-info-date">
+                      {formatDateString(post.createdAt.toString())} - {post.location}
+                    </p>
+                    <Link to={`/community/${post.community?._id}`}>
+                      <p className="community-post__card-user-info-community">
+                        <img
+                          src={`${post.community?.image?.secure_url ? post.community.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
+                          className="community-post__card-user-info-community-img"
+                        />
+                        <span>
+                          {post.community?.name} Community
+                        </span>
                       </p>
-                      <Link to={`/community/${post.community?._id}`}>
-                        <p className="community-post__card-user-info-community">
-                          <img 
-                            src={`${post.community?.image?.secure_url ? post.community.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
-                            className="community-post__card-user-info-community-img"
-                          />
-                          <span>
-                            {post.community?.name} Community
-                          </span>
-                        </p>
-                      </Link>
-                    </div>
+                    </Link>
                   </div>
-                </Link>
+                </div>
                 {post.author._id === user.id && (
                   <div className="community-post__card-actions">
                     <Link

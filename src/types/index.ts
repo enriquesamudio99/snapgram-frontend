@@ -16,12 +16,17 @@ export interface IAuthUser {
   username: string;
   email: string;
   bio: string;
+  image: string | null;
 };
 
 export interface IUser {
   _id: string;
   name: string;
   username: string;
+  image: {
+    public_id: string;
+    secure_url: string;
+  };
   email: string;
   bio: string;
   followers: string[];
@@ -69,6 +74,10 @@ export interface IPost {
     _id: string;
     name: string;
     username: string;
+    image: null | {
+      public_id: string;
+      secure_url: string;
+    };
   };
   createdAt: Date;
   updatedAt: Date;
@@ -135,6 +144,22 @@ export interface IUnfollowUserResponse {
 
 export interface IUnfollowUserResult {
   response?: IUnfollowUserResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IUpdateProfileResponse {
+  success: boolean,
+  user: IUser;
+}
+
+export interface IUpdateProfileResult {
+  response?: IUpdateProfileResponse;
   error?: {
     message?: string;
     data?: {

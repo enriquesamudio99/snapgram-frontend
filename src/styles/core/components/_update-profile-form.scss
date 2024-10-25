@@ -1,0 +1,38 @@
+.update-profile-form {
+  margin-top: 3.125rem;
+
+  &__preview-img-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__preview-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    &--remove {
+      filter: blur(2px);
+    }
+  }
+
+  &__preview-btn {
+    background-color: var(--clr-warning);
+    padding: .625rem 1.25rem;
+    border-radius: .625rem;
+    font-size: .75rem;
+    font-weight: var(--fw-semibold);
+
+    &--revert {
+      background-color: var(--clr-primary);
+    }
+  }
+
+  &__message {
+    font-size: .875rem;
+    color: var(--clr-light-3);
+  }
+}

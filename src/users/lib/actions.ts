@@ -7,7 +7,9 @@ import {
   IGetUsersResponse, 
   IGetUsersResult, 
   IUnfollowUserResponse, 
-  IUnfollowUserResult
+  IUnfollowUserResult,
+  IUpdateProfileResponse,
+  IUpdateProfileResult
 } from "../../types";
 import { api } from "../../common/api";
 
@@ -111,9 +113,39 @@ const unfollowUser = async (userId: string): Promise<IUnfollowUserResult> => {
   }
 }
 
+const updateProfile = async ({ data, userId } : { data: FormData, userId: string }) : Promise<IUpdateProfileResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IUpdateProfileResponse> = await api.patch(`/auth/update/${userId}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+
+    return {
+      response: responseData
+    }
+  } catch (error: unknown) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      return {
+        error: {
+          message: error.message,
+          data: error.response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+} 
+
 export {
   getUsers,
   getUser,
   followUser,
-  unfollowUser
+  unfollowUser,
+  updateProfile
 }

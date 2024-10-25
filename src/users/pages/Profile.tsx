@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFollowUserMutation, useUnfollowUserMutation, useGetUser } from "../hooks";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../common/hooks";
@@ -98,7 +98,7 @@ const Profile = () => {
           <header className="profile__header">
             <div className="profile__img-container">
               <img
-                src="/assets/icons/profile-placeholder.svg"
+                src={`${user.image ? user.image.secure_url : "/assets/icons/profile-placeholder.svg"}`}
                 alt="User Profile"
                 className="profile__img"
               />
@@ -110,8 +110,8 @@ const Profile = () => {
                   <p className="profile__username">@{user.username}</p>
                 </div>
                 {user._id === currentUser.id ? (
-                  <button
-                    type="button"
+                  <Link
+                    to={`/update-profile/${user._id}`}
                     className="profile__edit-btn"
                   >
                     <img
@@ -120,7 +120,7 @@ const Profile = () => {
                       className="profile__edit-btn-icon"
                     />
                     Edit Profile
-                  </button>
+                  </Link>
                 ) : (
                   <button
                     onClick={handleFollowUser}

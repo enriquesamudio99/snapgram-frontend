@@ -3,8 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { CreateCommunityValidation } from "../../communities/lib/validation";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button, FormInput, FormTextarea } from "../../common/components";
-import CommunityImageUploader from "./CommunityImageUploader";
+import { Button, FormInput, FormTextarea, ProfileImageUploader } from "../../common/components";
 import { toast } from "react-toastify";
 import { useCommunityMutation } from "../hooks";
 
@@ -88,7 +87,7 @@ const CreateCommunityForm = () => {
               control={form.control}
               name="images"
               render={({ field }) => (
-                <CommunityImageUploader
+                <ProfileImageUploader
                   fieldChange={field.onChange}
                   error={form.formState.errors.images?.message}
                 />

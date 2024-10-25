@@ -27,40 +27,42 @@ const PostItem = ({ post, user, showUser = true, showStats = true, isCommunity =
           />
         </Link>
         {isSharedPost && (
-          <img 
+          <img
             src="/assets/icons/white-shared.svg"
             alt="Share Icon"
             className="post-item__is-shared"
           />
         )}
         {post.images.length > 1 && (
-          <img 
+          <img
             src="/assets/icons/carousel.svg"
             alt="Carousel Icon"
             className="post-item__carousel"
           />
         )}
-        <div className="post-item__info">
-          {showUser && (
-            <Link to={`/profile/${postData.author._id}`}>
-              <div className="post-item__user">
-                <img
-                  src="/assets/icons/profile-placeholder.svg"
-                  alt="User Profile"
-                  className="post-item__user-img"
-                />
-                <p className="post-item__user-username">@{postData.author.username}</p>
-              </div>
-            </Link>
-          )}
-          {showStats && (
-            <PostStats
-              post={post}
-              user={user}
-              isPostItem={true}
-            />
-          )}
-        </div>
+        {(showUser || showStats) && (
+          <div className="post-item__info">
+            {showUser && (
+              <Link to={`/profile/${postData.author._id}`}>
+                <div className="post-item__user">
+                  <img
+                    src={`${postData.author.image?.secure_url ? postData.author.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
+                    alt={`${post.author.username} Profile`}
+                    className="post-item__user-img"
+                  />
+                  <p className="post-item__user-username">@{postData.author.username}</p>
+                </div>
+              </Link>
+            )}
+            {showStats && (
+              <PostStats
+                post={post}
+                user={user}
+                isPostItem={true}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

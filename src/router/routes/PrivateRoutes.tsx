@@ -1,14 +1,7 @@
-import { Communities, Community, CommunityPost, CreateCommunity, CreateCommunityPost, UpdateCommunityPost } from '../../communities/pages';
 import { MainLayout } from '../../layouts';
-import { 
-  CreatePost, 
-  UpdatePost,
-  Home, 
-  Post,
-  Explore, 
-  Saved
-} from '../../posts/pages';
-import { People, Profile } from '../../users/pages';
+import { Communities, Community, CommunityPost, CreateCommunity, CreateCommunityPost, UpdateCommunityPost } from '../../communities/pages';
+import { CreatePost, UpdatePost, Home, Post, Explore, Saved } from '../../posts/pages';
+import { People, Profile, UpdateProfile } from '../../users/pages';
 
 const privateRoutes = [
   {
@@ -24,6 +17,7 @@ const privateRoutes = [
       { path: 'saved', element: <Saved /> },
       // Users
       { path: 'profile/:userId', element: <Profile /> },
+      { path: 'update-profile/:userId', element: <UpdateProfile /> },
       { path: 'people', element: <People /> },
       // Communities
       { path: 'communities', element: <Communities /> },
