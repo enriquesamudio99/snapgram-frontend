@@ -34,7 +34,7 @@ const RequestUserItem = ({ communityId, user }: UserItemProps) => {
           className="request-user-item__info"
         >
           <img
-            src={`${user.image.secure_url ? user.image.secure_url : "/assets/icons/profile-placeholder.svg"}`}
+            src={`${user.image?.secure_url ? user.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
             alt={`${user.name} Profile`}
             className="request-user-item__img"
           />

@@ -23,7 +23,7 @@ export interface IUser {
   _id: string;
   name: string;
   username: string;
-  image: {
+  image: null | {
     public_id: string;
     secure_url: string;
   };

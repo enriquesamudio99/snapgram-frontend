@@ -64,7 +64,7 @@ const UserItem = ({ currentUser, user, showFollowBtn = true, isMemberItem = fals
           className="user-item__info"
         >
           <img
-            src={`${user.image.secure_url ? user.image.secure_url : "/assets/icons/profile-placeholder.svg"}`}
+            src={`${user.image?.secure_url ? user.image?.secure_url : "/assets/icons/profile-placeholder.svg"}`}
             alt={`${user.name} Profile`}
             className="user-item__img"
           />
