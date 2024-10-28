@@ -25,7 +25,7 @@ const TopBar = () => {
           </Link>
           <Link to={`/profile/${user.id}`} className="top-bar__profile-link">
             <img
-              src="/assets/icons/profile-placeholder.svg"
+              src={`${user.image ? user.image : "/assets/icons/profile-placeholder.svg"}`}
               alt="User Profile"
               className="top-bar__profile"
             />
