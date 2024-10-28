@@ -26,6 +26,9 @@ const useDeletePostMutation = () => {
       queryClient.invalidateQueries({
         queryKey: [POSTS_QUERY_KEYS.GET_FOLLOWING_POSTS]
       })
+      queryClient.invalidateQueries({
+        queryKey: [POSTS_QUERY_KEYS.GET_POSTS]
+      })
     }
   });
 
