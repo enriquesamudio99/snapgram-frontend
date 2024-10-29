@@ -1,4 +1,5 @@
 export { useCommunityMutation } from './useCommunityMutation';
+export { useUpdateCommunityMutation } from './useUpdateCommunityMutation';
 export { useGetCommunities } from './useGetCommunities';
 export { useGetCommunity } from './useGetCommunity';
 export { useJoinCommunityMutation } from './useJoinCommunityMutation';
@@ -11,3 +12,4 @@ export { useGetRequestsByCommunity } from './useGetRequestsByCommunity';
 export { useAcceptMemberMutation } from './useAcceptMemberMutation';
 export { useDenyMemberMutation } from './useDenyMemberMutation';
 export { useDeleteMemberMutation } from './useDeleteMemberMutation';
+export { useDeleteCommunityMutation } from './useDeleteCommunityMutation';

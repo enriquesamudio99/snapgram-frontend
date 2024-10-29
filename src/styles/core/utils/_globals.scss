@@ -26,11 +26,19 @@ body {
   }
 
   &__input,
-  &__textarea {
+  &__textarea,
+  &__select {
     padding: 1rem 1.25rem;
     background-color: var(--clr-dark-3);
     font-weight: var(--fw-semibold);
     border-radius: .625rem;
+    font-family: inherit;
+  }
+
+  &__select {
+    appearance: none; /* Oculta la flecha en la mayoría de navegadores */
+    -webkit-appearance: none; /* Safari y Chrome */
+    -moz-appearance: none; /* Firefox */
   }
 
   &__textarea {

@@ -125,7 +125,7 @@ const Profile = () => {
                   <button
                     onClick={handleFollowUser}
                     type="button"
-                    className="profile__follow-btn"
+                    className={`profile__follow-btn ${checkFollowing(followers, currentUser.id) ? "profile__follow-btn--warning" : ""}`}
                   >
                     {checkFollowing(followers, currentUser.id)
                       ? "Unfollow"

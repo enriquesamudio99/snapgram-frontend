@@ -110,6 +110,10 @@
     @media (width >= 768px) {
       margin-top: .375rem;
     }
+
+    &--warning {
+      background-color: var(--clr-warning);
+    }
   }
 
   &__stats {

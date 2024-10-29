@@ -317,6 +317,22 @@ export interface ICommunityResult {
   };
 }
 
+export interface IUpdateCommunityResponse {
+  success: boolean;
+  community: ICommunity;
+}
+
+export interface IUpdateCommunityResult {
+  response?: IUpdateCommunityResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
 export interface ICommunitiesResponse {
   success: boolean;
   communities: ICommunity[];
@@ -439,6 +455,22 @@ export interface IDeleteMemberResponse {
 
 export interface IDeleteMemberResult {
   response?: IDeleteMemberResponse;
+  error?: {
+    message?: string;
+    data?: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+export interface IDeleteCommunityResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface IDeleteCommunityResult {
+  response?: IDeleteCommunityResponse;
   error?: {
     message?: string;
     data?: {

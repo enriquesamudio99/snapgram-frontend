@@ -71,6 +71,12 @@
     }
   }
 
+  &__admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   &__edit-btn {
     display: flex;
     align-items: center;
@@ -84,10 +90,13 @@
       width: 16px;
       height: 16px;
     }
+  }
 
-    @media (width >= 768px) {
-      margin-top: .375rem;
-    }
+  &__delete-btn {
+    padding: .625rem 1.25rem;
+    font-weight: var(--fw-semibold);
+    background-color: var(--clr-warning);
+    border-radius: .5rem;
   }
 
   &__name {

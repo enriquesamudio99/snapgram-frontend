@@ -47,7 +47,8 @@ const FilesUploader = ({ fieldChange, imagesUrl = [], error }: FileUploaderProps
     onDrop,
     accept: {
       'image/*': ['.png', '.jpeg', '.jpg', '.svg']
-    }
+    },
+    maxSize: 1024 * 1024
   });
 
   return (

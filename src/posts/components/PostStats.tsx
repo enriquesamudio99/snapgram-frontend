@@ -53,14 +53,14 @@ const PostStats = ({ post, user, isPostItem = false, isCommunity = false }: Post
 
     if (hasLiked) {
       newLikes = newLikes.filter((id) => id !== user.id);
-      await unlikePostMutation.mutateAsync(post._id);
       setLikes(newLikes);
+      await unlikePostMutation.mutateAsync(post._id);
       return;
     }
 
     newLikes.push(user.id);
-    await likePostMutation.mutateAsync(post._id);
     setLikes(newLikes);
+    await likePostMutation.mutateAsync(post._id);
   }
 
   const handleSavePost = async (e: React.MouseEvent) => {

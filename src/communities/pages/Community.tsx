@@ -1,8 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useGetCommunity } from "../hooks";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDeleteCommunityMutation, useGetCommunity } from "../hooks";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../common/hooks";
 import { CommunityActions, CommunityTabs } from "../components";
+import { toast } from "react-toastify";
 
 const Community = () => {
 
@@ -10,6 +11,7 @@ const Community = () => {
   const navigate = useNavigate();
   const { communityId } = useParams();
   const { getCommunityQuery } = useGetCommunity(communityId || null);
+  const deleteCommunityMutation = useDeleteCommunityMutation();
   const [totalPosts, setTotalPosts] = useState<string[]>([]);
   const [members, setMembers] = useState<string[]>([]);
   const [membersRequests, setMembersRequests] = useState<string[]>([]);
@@ -33,6 +35,18 @@ const Community = () => {
     return;
   }
 
+  const handleDeleteCommunity = async () => {
+    const { response, error } = await deleteCommunityMutation.mutateAsync(community._id);
+
+    if (response) {
+      navigate(-1);
+    }
+
+    if (error) {
+      toast.error(error.message);
+    }
+  }
+
   return (
     <section className="main-content__wrapper">
       <div className="community">
@@ -53,17 +67,26 @@ const Community = () => {
                   <p className="community__username">{community.communityType} Community</p>
                 </div>
                 {community.createdBy === currentUser.id ? (
-                  <button
-                    type="button"
-                    className="community__edit-btn"
-                  >
-                    <img
-                      src="/assets/icons/edit-post.svg"
-                      alt="Edit Post Icon"
-                      className="community__edit-btn-icon"
-                    />
-                    Edit Community
-                  </button>
+                  <div className="community__admin-actions">
+                    <Link
+                      to={`/update-community/${community._id}`}
+                      className="community__edit-btn"
+                    >
+                      <img
+                        src="/assets/icons/edit-post.svg"
+                        alt="Edit Post Icon"
+                        className="community__edit-btn-icon"
+                      />
+                      Update Community
+                    </Link>
+                    <button
+                      type="button"
+                      className="community__delete-btn"
+                      onClick={handleDeleteCommunity}
+                    >
+                      Delete Community
+                    </button>
+                  </div>
                 ) : (
                   <CommunityActions
                     community={community}

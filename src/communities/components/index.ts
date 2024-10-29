@@ -1,5 +1,5 @@
 export { default as CreateCommunityForm } from './CreateCommunityForm';
-export { default as CommunityImageUploader } from './CommunityImageUploader';
+export { default as UpdateCommunityForm } from './UpdateCommunityForm';
 export { default as CommunityItem } from './CommunityItem';
 export { default as CommunityActions } from './CommunityActions';
 export { default as CommunityTabs } from './CommunityTabs';

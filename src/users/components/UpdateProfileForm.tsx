@@ -95,6 +95,7 @@ const UpdateProfileForm = ({ user } : { user: IUser }) => {
               name="images"
               render={({ field }) => (
                 <ProfileImageUploader
+                  label="Add Profile Image"
                   fieldChange={field.onChange}
                   error={form.formState.errors.images?.message}
                 />

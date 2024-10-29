@@ -1,6 +1,6 @@
 import { api } from "../../common/api";
 import { AxiosError, AxiosResponse } from "axios";
-import { IAcceptMemberResponse, IAcceptMemberResult, ICommunitiesResponse, ICommunitiesResult, ICommunityResponse, ICommunityResult, IDeleteMemberResponse, IDeleteMemberResult, IDeleteRequestCommunityResponse, IDeleteRequestCommunityResult, IDenyMemberResponse, IDenyMemberResult, IGetUsersResponse, IGetUsersResult, IJoinCommunityResponse, IJoinCommunityResult, ILeaveCommunityResponse, ILeaveCommunityResult, IPostsResponse, IPostsResult, IRequestCommunityResponse, IRequestCommunityResult,  } from "../../types";
+import { IAcceptMemberResponse, IAcceptMemberResult, ICommunitiesResponse, ICommunitiesResult, ICommunityResponse, ICommunityResult, IDeleteCommunityResponse, IDeleteCommunityResult, IDeleteMemberResponse, IDeleteMemberResult, IDeleteRequestCommunityResponse, IDeleteRequestCommunityResult, IDenyMemberResponse, IDenyMemberResult, IGetUsersResponse, IGetUsersResult, IJoinCommunityResponse, IJoinCommunityResult, ILeaveCommunityResponse, ILeaveCommunityResult, IPostsResponse, IPostsResult, IRequestCommunityResponse, IRequestCommunityResult, IUpdateCommunityResponse, IUpdateCommunityResult,  } from "../../types";
 
 const getCommunities = async (): Promise<ICommunitiesResult> => {
   try {
@@ -57,6 +57,36 @@ const getCommunity = async (communityId: string | null): Promise<ICommunityResul
 const createCommunity = async (data: FormData): Promise<ICommunityResult> => {
   try {
     const { data: responseData }: AxiosResponse<ICommunityResponse> = await api.post('/communities', data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }); 
+
+    return {
+      response: responseData
+    }
+  } catch (error: unknown) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const updateCommunity = async ({ data, communityId } : { data: FormData, communityId: string }): Promise<IUpdateCommunityResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IUpdateCommunityResponse> = await api.patch(`/communities/${communityId}`, data, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
@@ -338,10 +368,36 @@ const deleteMember = async ({ communityId, memberId } : {communityId: string | u
   }
 }
 
+const deleteCommunity = async (communityId: string): Promise<IDeleteCommunityResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IDeleteCommunityResponse> = await api.delete(`/communities/${communityId}`);
+ 
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 export {
   getCommunities,
   getCommunity,
   createCommunity,
+  updateCommunity,
   joinCommunity,
   leaveCommunity,
   requestCommunityMembership,
@@ -351,5 +407,6 @@ export {
   getRequestsByCommunity,
   acceptMember,
   denyMember,
-  deleteMember
+  deleteMember,
+  deleteCommunity
 }

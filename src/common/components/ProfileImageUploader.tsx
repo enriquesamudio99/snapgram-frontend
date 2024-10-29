@@ -5,9 +5,10 @@ type FileUploaderProps = {
   fieldChange: (file: File | null) => void;
   imageUrl?: string;
   error: string | undefined;
+  label: string;
 }
 
-const ProfileImageUploader = ({ fieldChange, imageUrl = '', error }: FileUploaderProps) => {
+const ProfileImageUploader = ({ fieldChange, imageUrl = '', error, label }: FileUploaderProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>(imageUrl);
 
@@ -48,12 +49,13 @@ const ProfileImageUploader = ({ fieldChange, imageUrl = '', error }: FileUploade
       'image/*': ['.png', '.jpeg', '.jpg', '.svg']
     },
     multiple: false,
+    maxSize: 1024 * 1024
   });
 
   return (
     <>
       <div {...getRootProps()} className="file-uploader">
-        <label htmlFor="fileInput" className="file-uploader__label">Add Community Photo</label>
+        <label htmlFor="fileInput" className="file-uploader__label">{label}</label>
         <input {...getInputProps()} id="fileInput" className="file-uploader__input" />
         <div className="file-uploader__box">
           <img
