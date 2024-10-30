@@ -1,17 +1,44 @@
 import { PostItem } from "../components";
 import { useAuth } from "../../common/hooks";
 import { useGetSavedPosts } from "../hooks";
+import { IAuthUser, IPost } from "../../types";
+
+interface SavedResultsProps {
+  isLoading: boolean;
+  posts: IPost[] | undefined;
+  user: IAuthUser;
+}
+
+const SavedResults = ({ isLoading, posts, user }: SavedResultsProps) => {
+  if (isLoading) {
+    return <p className="saved__message">Loading...</p>
+  }
+
+  if (!posts?.length) {
+    return (
+      <p className="saved__message">No posts yet</p>
+    )
+  }
+
+  return (
+    <>
+      {posts.map(post => (
+        <PostItem
+          key={post._id}
+          post={post}
+          user={user}
+          showUser={false}
+          showStats={false}
+        />
+      ))}
+    </>
+  )
+}
 
 const Saved = () => {
 
   const { user } = useAuth();
   const { savedPostsQuery } = useGetSavedPosts();
-
-  if (savedPostsQuery.isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  const posts = savedPostsQuery.data?.response?.posts;
 
   return (
     <section className="main-content__wrapper">
@@ -26,21 +53,11 @@ const Saved = () => {
             Saved Posts
           </h2>
           <div className="saved__grid">
-            {posts && posts.length > 0 ? (
-              <>
-                {posts.map(post => (
-                  <PostItem 
-                    key={post._id}
-                    post={post}
-                    user={user}
-                    showUser={false}
-                    showStats={false}
-                  />
-                ))}
-              </>
-            ) : (
-              <p className="saved__message">You have not saved any post</p>
-            )}
+            <SavedResults 
+              isLoading={savedPostsQuery.isLoading}
+              posts={savedPostsQuery.data?.response?.posts}
+              user={user}
+            />
           </div>
         </div>
       </div>

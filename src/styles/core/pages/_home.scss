@@ -33,5 +33,10 @@
       display: grid;
       gap: 2.5rem;
     }
+
+    &-message {
+      font-size: 1rem;
+    color: var(--clr-light-3);
+    }
   }
 }

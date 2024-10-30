@@ -20,7 +20,7 @@ const CreateCommunityForm = () => {
       username: '',
       images: undefined,
       bio: '',
-      communityType: undefined
+      communityType: "Public"
     },
   });
 
