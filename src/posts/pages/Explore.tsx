@@ -1,17 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useGetPosts, useSearchPosts } from "../hooks";
 import { PostItem } from "../components";
 import { useAuth, useDebounce } from "../../common/hooks";
 import { IAuthUser, IPost } from "../../types";
+import { useInView } from "react-intersection-observer";
+import { Loader } from "../../common/components";
 
 interface ExploreResultsProps {
   isLoading?: boolean;
   isFetching?: boolean;
   posts: IPost[] | undefined;
   user: IAuthUser;
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
 }
 
-const ExploreResults = ({ isLoading = false, isFetching = false, posts, user }: ExploreResultsProps) => {
+const ExploreResults = ({ isLoading = false, isFetching = false, posts, user, hasNextPage, fetchNextPage }: ExploreResultsProps) => {
+
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage]);
 
   if (isLoading || isFetching) {
     return <p className="explore-results__message">Loading...</p>;
@@ -32,6 +44,16 @@ const ExploreResults = ({ isLoading = false, isFetching = false, posts, user }: 
           />
         ))}
       </div>
+      {hasNextPage && (
+        <div className="home__grid-loader-container">
+          <div
+            ref={ref}
+            className="home__grid-loader"
+          >
+            <Loader />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -46,8 +68,8 @@ const Explore = () => {
   const debouncedValue = useDebounce(searchValue, 800);
   const { searchPostsQuery } = useSearchPosts(debouncedValue);
 
-  const posts = getPostsQuery.data?.response?.posts;
-  const searchPosts = searchPostsQuery.data?.response?.posts;
+  const posts = getPostsQuery.data?.pages.flatMap((page) => page?.response?.posts as IPost[]);
+  const searchPosts = searchPostsQuery.data?.pages.flatMap((page) => page?.response?.posts as IPost[]);
 
   const shouldShowSearchResults = searchValue !== "";
 
@@ -67,7 +89,7 @@ const Explore = () => {
           </div>
           <div className="explore__results">
             <h1 className="explore__results-title">
-              {searchValue !== "" ? `Search Term: ${searchValue}` : "Popular Today"}
+              {searchValue !== "" ? `Search Term: ${searchValue}` : "New Today"}
             </h1>
           </div>
           <div className="explore__grid">
@@ -76,12 +98,16 @@ const Explore = () => {
                 isFetching={searchPostsQuery.isFetching}
                 posts={searchPosts}
                 user={user}
+                hasNextPage={searchPostsQuery.hasNextPage}
+                fetchNextPage={searchPostsQuery.fetchNextPage}
               />
             ) : (
               <ExploreResults
                 isLoading={getPostsQuery.isLoading}
                 posts={posts}
                 user={user}
+                hasNextPage={getPostsQuery.hasNextPage}
+                fetchNextPage={getPostsQuery.fetchNextPage}
               />
             )}
           </div>

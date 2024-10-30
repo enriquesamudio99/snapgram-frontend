@@ -372,9 +372,9 @@ const getPost = async (postId: string): Promise<IGetPostResult> => {
   }
 }
 
-const getPosts = async (): Promise<IPostsResult> => {
+const getPosts = async (pageParam: number): Promise<IPostsResult> => {
   try {
-    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get("/posts");
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts?page=${pageParam}`);
  
     return {
       response: responseData
@@ -398,11 +398,12 @@ const getPosts = async (): Promise<IPostsResult> => {
   }
 }
 
-const searchPosts = async (searchQuery: string): Promise<IPostsResult> => {
+const searchPosts = async ({ pageParam, searchQuery } : { pageParam: number, searchQuery: string }): Promise<IPostsResult> => {
   try {
     const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get("/posts", {
       params: {
-        searchQuery
+        searchQuery,
+        page: pageParam
       }
     });
  

@@ -1,12 +1,16 @@
 import { POSTS_QUERY_KEYS } from "../lib/queryKeys";
 import { getPosts } from '../lib/actions';
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 const useGetPosts = () => {
-  const getPostsQuery = useQuery({
+  const getPostsQuery = useInfiniteQuery({
     queryKey: [POSTS_QUERY_KEYS.GET_POSTS],
-    queryFn: () => getPosts(),
-    staleTime: 1000 * 60 * 60
+    queryFn: ({ pageParam }) => getPosts(pageParam),
+    staleTime: 1000 * 60 * 60,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.response?.hasNextPage ? lastPage.response.nextPage : null;
+    }
   })
 
   return {
