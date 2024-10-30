@@ -264,9 +264,9 @@ const unsharePost = async (postId: string): Promise<ISharePostResult> => {
   }
 }
 
-const getFollowingPosts = async (): Promise<IPostsResult> => {
+const getFollowingPosts = async (pageParam: number): Promise<IPostsResult> => {
   try {
-    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get('/posts/following');
+    const { data: responseData }: AxiosResponse<IPostsResponse> = await api.get(`/posts/following?page=${pageParam}`);
 
     return {
       response: responseData

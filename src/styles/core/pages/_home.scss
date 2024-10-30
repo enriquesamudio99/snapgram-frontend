@@ -38,5 +38,13 @@
       font-size: 1rem;
     color: var(--clr-light-3);
     }
+
+    &-loader-container {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
+  
 }

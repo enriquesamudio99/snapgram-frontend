@@ -189,7 +189,8 @@ export interface IPostsResponse {
   success: boolean;
   posts: IPost[];
   totalPost: number;
-  isNext: boolean;
+  nextPage: number | null;
+  hasNextPage: boolean;
 }
 
 export interface IPostsResult {
