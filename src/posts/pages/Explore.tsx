@@ -45,10 +45,10 @@ const ExploreResults = ({ isLoading = false, isFetching = false, posts, user, ha
         ))}
       </div>
       {hasNextPage && (
-        <div className="home__grid-loader-container">
+        <div className="explore-results__loader-container">
           <div
             ref={ref}
-            className="home__grid-loader"
+            className="explore-results__loader"
           >
             <Loader />
           </div>

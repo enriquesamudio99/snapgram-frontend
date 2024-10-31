@@ -13,10 +13,44 @@ import {
 } from "../../types";
 import { api } from "../../common/api";
 
-const getUsers = async () : Promise<IGetUsersResult> => {
+const getUsers = async (pageParam: number) : Promise<IGetUsersResult> => {
   try {
-    const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users");
+    const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users", {
+      params: {
+        page: pageParam
+      }
+    });
+    
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      return {
+        error: {
+          message: error.message,
+          data: error.response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
 
+const searchUsers = async ({ searchTerm, pageParam } : { searchTerm: string; pageParam: number; }) : Promise<IGetUsersResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users", {
+      params: {
+        searchTerm,
+        page: pageParam
+      }
+    });
+    
     return {
       response: responseData
     }
@@ -144,6 +178,7 @@ const updateProfile = async ({ data, userId } : { data: FormData, userId: string
 
 export {
   getUsers,
+  searchUsers,
   getUser,
   followUser,
   unfollowUser,
