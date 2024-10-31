@@ -1,12 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getCommunities } from '../lib/actions';
 import { COMMUNITIES_QUERY_KEYS } from "../lib/queryKeys";
 
 const useGetCommunities = () => {
-  const getCommunitiesQuery = useQuery({
+  const getCommunitiesQuery = useInfiniteQuery({
     queryKey: [COMMUNITIES_QUERY_KEYS.GET_COMMUNITIES],
-    queryFn: () => getCommunities(),
-    staleTime: 1000 * 60 * 60
+    queryFn: ({ pageParam }) => getCommunities(pageParam),
+    staleTime: 1000 * 60 * 60,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.response?.hasNextPage ? lastPage.response.nextPage : null;
+    }
   })
 
   return {

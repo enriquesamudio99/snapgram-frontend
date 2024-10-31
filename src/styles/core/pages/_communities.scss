@@ -22,50 +22,91 @@
     }
   }
 
-  &__header {
+  &__search {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.875rem;
+
+    &-title {
+      font-size: 1.25rem;
+      text-align: center;
+      font-weight: var(--fw-bold);
+
+      @media (width >= 768px) {
+        font-size: 2.25rem;
+      }
+    }
+
+    &-input {
+      width: 100%;
+      max-width: 657px;
+      padding: 1rem;
+      background-color: var(--clr-dark-3);
+      color: var(--clr-light-1);
+      border-radius: 1rem;
+
+      &::placeholder {
+        color: var(--clr-light-4);
+      }
+
+      @media (width >= 768px) {
+        padding: 1.25rem;
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  &__results {
+    margin-top: 4.5rem;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-  }
 
-  &__title {
-    display: flex;
-    align-items: center;
-    gap: .625rem;
-    font-size: 1.5rem;
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: 1.125rem;
+      font-weight: var(--fw-bold);
+      letter-spacing: -1px;
 
-    @media (width >= 768px) {
-      font-size: 2.25rem;
+      @media (width >= 768px) {
+        font-size: 1.875rem;
+      }
+
+      &-img {
+        width: 36px;
+        height: 36px;
+      }
     }
-
-    &-img {
-      width: 36px;
-      height: 36px;
+    
+    &-create-btn {
+      border-radius: .5rem;
+      font-size: .875rem;
+      line-height: 1.125rem;
+      padding: .625rem 1.25rem;
+      background-color: var(--clr-primary);
+      font-weight: var(--fw-semibold);
+  
+      @media (width >= 768px) {
+        padding: .625rem 2rem;
+      }
     }
   }
+}
 
-  &__create-btn {
-    border-radius: .5rem;
-    font-size: .875rem;
-    line-height: 1.125rem;
-    padding: .625rem 1.25rem;
-    background-color: var(--clr-primary);
-    font-weight: var(--fw-semibold);
-
-    @media (width >= 768px) {
-      padding: .625rem 2rem;
-    }
-  }
+.communities-results {
+  margin-top: 2.25rem;
 
   &__grid {
-    margin-top: 2.375rem;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.875rem;
 
     @media (width >= 768px) {
-      margin-top: 3.625rem;
-      gap: 3rem;
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -75,11 +116,15 @@
   }
 
   &__message {
-    margin-top: 2.375rem;
+    margin-top: 2.25rem;
+    font-size: 1rem;
     color: var(--clr-light-3);
+  }
 
-    @media (width >= 768px) {
-      margin-top: 3.625rem;
-    }
+  &__loader-container {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

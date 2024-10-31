@@ -2,9 +2,44 @@ import { api } from "../../common/api";
 import { AxiosError, AxiosResponse } from "axios";
 import { IAcceptMemberResponse, IAcceptMemberResult, ICommunitiesResponse, ICommunitiesResult, ICommunityResponse, ICommunityResult, IDeleteCommunityResponse, IDeleteCommunityResult, IDeleteMemberResponse, IDeleteMemberResult, IDeleteRequestCommunityResponse, IDeleteRequestCommunityResult, IDenyMemberResponse, IDenyMemberResult, IGetUsersResponse, IGetUsersResult, IJoinCommunityResponse, IJoinCommunityResult, ILeaveCommunityResponse, ILeaveCommunityResult, IPostsResponse, IPostsResult, IRequestCommunityResponse, IRequestCommunityResult, IUpdateCommunityResponse, IUpdateCommunityResult,  } from "../../types";
 
-const getCommunities = async (): Promise<ICommunitiesResult> => {
+const getCommunities = async (pageParam: number): Promise<ICommunitiesResult> => {
   try {
-    const { data: responseData }: AxiosResponse<ICommunitiesResponse> = await api.get('/communities');
+    const { data: responseData }: AxiosResponse<ICommunitiesResponse> = await api.get('/communities', {
+      params: {
+        page: pageParam
+      }
+    });
+
+    return {
+      response: responseData
+    }
+  } catch (error: unknown) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      const { message, response } = error;
+      return {
+        error: {
+          message,
+          data: response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
+const searchCommunities = async ({ searchTerm, pageParam } : { searchTerm: string, pageParam: number }): Promise<ICommunitiesResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<ICommunitiesResponse> = await api.get('/communities', {
+      params: {
+        searchTerm,
+        page: pageParam
+      }
+    });
 
     return {
       response: responseData
@@ -395,6 +430,7 @@ const deleteCommunity = async (communityId: string): Promise<IDeleteCommunityRes
 
 export {
   getCommunities,
+  searchCommunities,
   getCommunity,
   createCommunity,
   updateCommunity,

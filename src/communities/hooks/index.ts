@@ -1,6 +1,7 @@
 export { useCommunityMutation } from './useCommunityMutation';
 export { useUpdateCommunityMutation } from './useUpdateCommunityMutation';
 export { useGetCommunities } from './useGetCommunities';
+export { useSearchCommunities } from './useSearchCommunities';
 export { useGetCommunity } from './useGetCommunity';
 export { useJoinCommunityMutation } from './useJoinCommunityMutation';
 export { useLeaveCommunityMutation } from './useLeaveCommunityMutation';
