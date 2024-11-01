@@ -66,6 +66,11 @@ const UpdateProfileForm = ({ user } : { user: IUser }) => {
     } 
   }
 
+  const handleUsernameChange = (value: string) => {
+    const formattedValue = value.toLowerCase().replace(/\s+/g, '_');
+    form.setValue('username', formattedValue); 
+  };
+
   return (
     <div className="update-profile-form">
       <form className="form" onSubmit={form.handleSubmit(onSubmit)}>
@@ -125,7 +130,10 @@ const UpdateProfileForm = ({ user } : { user: IUser }) => {
                   type="text"
                   placeholder="footballcommunity"
                   value={field.value}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleUsernameChange(e.target.value);
+                  }}
                   label="Username"
                   error={form.formState.errors.username?.message}
                 />

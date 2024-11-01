@@ -37,6 +37,11 @@ const Register = () => {
     }
   }
 
+  const handleUsernameChange = (value: string) => {
+    const formattedValue = value.toLowerCase().replace(/\s+/g, '_');
+    form.setValue('username', formattedValue); 
+  };
+
   return (
     <div className="auth__form">
       <div className="auth__form-header">
@@ -75,7 +80,10 @@ const Register = () => {
                   type="text"
                   placeholder="johndoe"
                   value={field.value}
-                  onChange={field.onChange}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleUsernameChange(e.target.value);
+                  }}
                   label="Username"
                   error={form.formState.errors.username?.message}
                 />
