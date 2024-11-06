@@ -89,7 +89,7 @@ const Explore = () => {
           </div>
           <div className="explore__results">
             <h1 className="explore__results-title">
-              {searchValue !== "" ? `Search Term: ${searchValue}` : "New Today"}
+              {searchValue !== "" ? `Search Term: ${searchValue}` : "Most Recent"}
             </h1>
           </div>
           <div className="explore__grid">
