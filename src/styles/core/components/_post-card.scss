@@ -9,10 +9,17 @@
   }
 
   &__shared-by {
-    margin-bottom: 1.25rem;
-    padding-bottom: 1.25rem;
+    font-size: .875rem;
+    margin-bottom: .625rem;
+    padding-bottom: .625rem;
     color: var(--clr-light-3);
     border-bottom: 1px solid var(--clr-light-4);
+    
+    @media (width >= 768px) {
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+    }
   }
 
   &__user {

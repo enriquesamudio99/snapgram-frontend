@@ -8,7 +8,11 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: 1.875rem;
+    gap: 1.25rem;
+
+    @media (width >= 768px) {
+      gap: 1.875rem;
+    }
   }
 
   &__action,
