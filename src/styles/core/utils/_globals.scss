@@ -56,3 +56,27 @@ body {
 .Toastify__toast-body {
   padding: 1rem 1.25rem;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2f2f2f;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-button {
+  background-color: #333; 
+  border-radius: 10px;
+}

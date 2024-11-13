@@ -4,6 +4,7 @@ import { PostCard } from "../components";
 import { useGetFollowingPosts } from "../hooks";
 import { useInView } from 'react-intersection-observer';
 import { Loader } from "../../common/components";
+import { TopCreators } from "../../users/components";
 
 interface HomeResultsProps {
   isLoading: boolean;
@@ -81,6 +82,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <TopCreators />
     </>
   )
 }

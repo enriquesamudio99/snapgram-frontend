@@ -9,6 +9,10 @@
     padding: 5rem 0;
   }
 
+  @media (width >= 1440px) {
+    padding: 5rem 29.0625rem 5rem 0;
+  }
+
   &__container {
     width: 100%;
     max-width: 600px;

@@ -42,6 +42,31 @@ const getUsers = async (pageParam: number) : Promise<IGetUsersResult> => {
   }
 }
 
+const getUsersByCreatedPosts = async () : Promise<IGetUsersResult> => {
+  try {
+    const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users/created-posts");
+    
+    return {
+      response: responseData
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      return {
+        error: {
+          message: error.message,
+          data: error.response?.data
+        }
+      }
+    }
+    return {
+      error: {
+        message: "Something wrong"
+      }
+    }
+  }
+}
+
 const searchUsers = async ({ searchTerm, pageParam } : { searchTerm: string; pageParam: number; }) : Promise<IGetUsersResult> => {
   try {
     const { data: responseData }: AxiosResponse<IGetUsersResponse> = await api.get("/users", {
@@ -178,6 +203,7 @@ const updateProfile = async ({ data, userId } : { data: FormData, userId: string
 
 export {
   getUsers,
+  getUsersByCreatedPosts,
   searchUsers,
   getUser,
   followUser,

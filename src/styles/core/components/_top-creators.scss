@@ -1,0 +1,43 @@
+.top-creators {
+  display: none;
+  min-width: 465px;
+  background-color: var(--clr-dark-2);
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 3rem 1.5rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+  }
+
+  @media (width >= 1440px) {
+    display: block;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: -1px;
+  }
+
+  &__grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.top-creators-results {
+  &__message {
+    font-size: 1rem;
+    color: var(--clr-light-3);
+  }
+}

@@ -17,6 +17,9 @@ const useUnfollowUserMutation = () => {
         queryKey: [USERS_QUERY_KEYS.GET_USERS]
       })
       queryClient.invalidateQueries({
+        queryKey: [USERS_QUERY_KEYS.GET_USERS_BY_CREATED_POSTS]
+      })
+      queryClient.invalidateQueries({
         queryKey: [USERS_QUERY_KEYS.GET_USER, data.response?.userId]
       })
       queryClient.invalidateQueries({

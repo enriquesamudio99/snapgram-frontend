@@ -1,0 +1,58 @@
+.top-creator-item {
+  border-radius: 1.25rem;
+  border: 3px solid var(--clr-dark-3);
+
+  &__container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__name {
+    margin-top: .625rem;
+    font-size: 1.125rem;
+    font-weight: var(--fw-semibold);
+    letter-spacing: -1px;
+  }
+
+
+  &__btn {
+    border-radius: .5rem;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    margin-top: .75rem;
+    padding: .625rem 2rem;
+    background-color: var(--clr-primary);
+    font-weight: var(--fw-semibold);
+
+    &--unfollow {
+      background-color: var(--clr-warning);
+    }
+  }
+
+  &__delete-member-btn {
+    border-radius: .5rem;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    margin-top: 1.25rem;
+    padding: .625rem 2rem;
+    background-color: var(--clr-warning);
+    font-weight: var(--fw-semibold);
+  }
+}
