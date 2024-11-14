@@ -10,6 +10,10 @@ export interface IContextType {
   logout: () => void;
 };
 
+export interface INotificationContextType {
+  test: boolean;
+};
+
 export interface IAuthUser {
   id: string;
   name: string;
